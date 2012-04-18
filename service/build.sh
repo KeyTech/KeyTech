@@ -1,5 +1,8 @@
+root="./service"
 gtest="/opt/gtest-1.6.0"
 gcovr="/usr/local/bin/gcovr"
+
+cd $root
 
 # Clean
 rm -R build
