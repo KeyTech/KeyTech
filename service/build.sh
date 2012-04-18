@@ -1,3 +1,4 @@
+current=`pwd`
 root="./service"
 gtest="/opt/gtest-1.6.0"
 gcovr="/usr/local/bin/gcovr"
@@ -22,5 +23,6 @@ g++ -I $gtest/include $gtest/src/gtest_main.cc build/main/program.o test/*Test.c
 # Execute tests and publish the results in XML format
 ./build/tests --gtest_output=xml:build/test-results.xml
 
+cd $current
 # Publish the coverage in XML format
-$gcovr -r . -x -o build/coverage.xml
+$gcovr -r . -x -o service/build/coverage.xml
