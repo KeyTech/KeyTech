@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="80">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df name="main" root="main">
+      <df name="include">
+        <in>calculator.h</in>
+      </df>
+      <in>calculator.cc</in>
+    </df>
+    <logicalFolder name="headers" displayName="Headers" projectFiles="true" root="test">
+      <itemPath>include/calculator.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="test" displayName="Test" projectFiles="true" root="test">
+      <itemPath>test/calculatorTest.cc</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>main</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+      </toolsSet>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile build</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
+          <executablePath>build/main/program.o</executablePath>
+          <ccTool>
+            <incDir>
+              <pElem>.</pElem>
+            </incDir>
+          </ccTool>
+        </makeTool>
+      </makefileType>
+      <item path="/opt/gtest-1.6.0/src/gtest-all.cc" ex="false" tool="1" flavor="0">
+        <ccTool>
+          <incDir>
+            <pElem>/opt/gtest-1.6.0</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="/opt/gtest-1.6.0/src/gtest-death-test.cc"
+            ex="false"
+            tool="3"
+            flavor="0">
+      </item>
+      <item path="/opt/gtest-1.6.0/src/gtest-filepath.cc"
+            ex="false"
+            tool="3"
+            flavor="0">
+      </item>
+      <item path="/opt/gtest-1.6.0/src/gtest-port.cc" ex="false" tool="3" flavor="0">
+      </item>
+      <item path="/opt/gtest-1.6.0/src/gtest-printers.cc"
+            ex="false"
+            tool="3"
+            flavor="0">
+      </item>
+      <item path="/opt/gtest-1.6.0/src/gtest-test-part.cc"
+            ex="false"
+            tool="3"
+            flavor="0">
+      </item>
+      <item path="/opt/gtest-1.6.0/src/gtest-typed-test.cc"
+            ex="false"
+            tool="3"
+            flavor="0">
+      </item>
+      <item path="/opt/gtest-1.6.0/src/gtest.cc" ex="false" tool="3" flavor="0">
+      </item>
+      <item path="/opt/gtest-1.6.0/src/gtest_main.cc" ex="false" tool="1" flavor="0">
+        <ccTool>
+          <incDir>
+            <pElem>include</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <folder path="home/stejanse/KeyTech/service/test">
+        <ccTool>
+          <incDir>
+            <pElem>/opt/gtest-1.6.0/include</pElem>
+            <pElem>include</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="main">
+        <ccTool>
+          <incDir>
+            <pElem>include</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="opt/gtest-1.6.0/src">
+        <ccTool>
+          <incDir>
+            <pElem>/opt/gtest-1.6.0/include</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+    </conf>
+  </confs>
+</configurationDescriptor>
