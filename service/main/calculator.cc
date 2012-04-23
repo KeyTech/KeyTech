@@ -1,4 +1,4 @@
-#include "include/calculator.h"
+#include "calculator.h"
 
 /**
 * Calculates the sum of two integers.

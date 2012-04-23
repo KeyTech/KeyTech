@@ -9,14 +9,14 @@ all: build
 
 build: clean build-prepare compile test
 
-build-complete: build publish-coverage-report generate-documentation
+build-complete: build publish-coverage-report generate-documentation run-cppcheck
 
 build-prepare:
 	mkdir build
 	mkdir build/main
 
 compile:
-	g++ main/*.cc -c -o build/main/program.o -fprofile-arcs -ftest-coverage
+	g++ main/*.cc -c -o build/main/program.o -I include -fprofile-arcs -ftest-coverage
 
 test: test-prepare test-compile
 	./build/tests --gtest_output=xml:build/test-results.xml
@@ -26,10 +26,13 @@ test-prepare:
 	ar -rv build/libgtest.a build/gtest-all.o
 
 test-compile:
-	g++ -I $(gtest)/include $(gtest)/src/gtest_main.cc build/main/program.o test/*Test.cc build/libgtest.a -o build/tests -pthread -fprofile-arcs
+	g++ -I $(gtest)/include -I include $(gtest)/src/gtest_main.cc build/main/program.o test/*Test.cc build/libgtest.a -o build/tests -pthread -fprofile-arcs
 
 generate-documentation:
 	doxygen doxygen.config
 
 publish-coverage-report:
 	$(gcovr) -r . -x -d -o build/coverage.xml
+
+run-cppcheck:
+	cppcheck --xml --enable=all -I include main 2> build/cppcheck.xml

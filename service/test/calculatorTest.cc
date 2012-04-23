@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../main/include/calculator.h"
+#include "calculator.h"
 
 TEST(CalculatorTest, sumTest) {
 	Calculator instance;
