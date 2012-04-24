@@ -26,7 +26,7 @@ test-prepare:
 	ar -rv build/libgtest.a build/gtest-all.o
 
 test-compile: test/protocol/*.cpp main/protocol/*.cpp
-	g++ -I $(gtest)/include -I include $(gtest)/src/gtest_main.cc $^ build/libgtest.a -o build/tests -pthread -fprofile-arcs
+	g++ -I $(gtest)/include -I include $(gtest)/src/gtest_main.cc $^ build/libgtest.a -o build/tests -pthread -fprofile-arcs -ftest-coverage
 
 generate-documentation:
 	doxygen doxygen.config
