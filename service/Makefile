@@ -1,6 +1,7 @@
 root="./service"
 gtest="/opt/gtest-1.6.0"
 gcovr="/usr/local/bin/gcovr"
+current_dir=`pwd`
 
 clean:
 	-rm -R build
@@ -32,7 +33,7 @@ generate-documentation:
 	doxygen doxygen.config
 
 publish-coverage-report:
-	$(gcovr) -r . -x -d -o build/coverage.xml
+	$(gcovr) -r $(current_dir) -x -d -o build/coverage.xml
 
 run-cppcheck:
 	cppcheck --xml --enable=all -I include main 2> build/cppcheck.xml
