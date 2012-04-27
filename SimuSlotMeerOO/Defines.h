@@ -22,26 +22,6 @@
 
 using namespace std;
 
-/*! \brief SimuLock client related defines:
- * 
- */
-typedef struct Response_Packet {
-    short locknr;
-    short checksum;
-    int id;
-    unsigned char flags;
-    unsigned char data[3];      
-} response_packet;
-
-typedef struct {
-        short locknr;
-        short checksum;
-        int id;
-        short pincode;
-        unsigned char flags;
-        unsigned char data;      
-} request_packet;
-
 /*! \brief Exit statuses:
  * 
  */

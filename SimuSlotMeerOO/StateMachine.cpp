@@ -40,8 +40,9 @@ bool StateMachine::init() {
 
 void StateMachine::runStateMachine() {
     uint8_t flags = 0;
+    int messages_sent = 0;
     while(true){
-        cout << "Next_state: " << next_state << endl;
+        //cout << "Next_state: " << next_state << endl;
         switch(next_state){
             case IDLE:
                 cout << "Test state IDLE" << endl;
@@ -53,16 +54,25 @@ void StateMachine::runStateMachine() {
                 break;
             case SEND:
                 cout << "Test state SEND" << endl;
-                if(communicate.sendRequest(&saddr, sockfd, lockID, slotIO.getStudentID(), slotIO.getPin() ) ) {
+                if((messages_sent < 3) && (communicate.sendRequest(&saddr, sockfd, lockID, slotIO.getStudentID(), slotIO.getPin() )) ) {
                     next_state = RECEIVE;
+                    cout << "Messages sent: " << messages_sent << endl;
+                    messages_sent += 1;
+                } else if(messages_sent >= 3) {
+                    cout << "Max attempts reached." << endl;
+                    next_state = IDLE;
+                    messages_sent = 0;
                 } else {
                     next_state = SEND;
+                    cout << "Messages sent: " << messages_sent << endl;
+                    messages_sent += 1;
                 }
                 break;
             case RECEIVE:
                 cout << "Test state RECEIVE" << endl;
                 if((flags = communicate.receiveResponse(&saddr, sockfd, lockID)) > 0 ) {
                     next_state = PROCESS_OUTPUT;
+                    messages_sent = 0;
                 } else {
                     next_state = SEND;
                 }

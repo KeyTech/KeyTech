@@ -39,19 +39,23 @@ uint32_t HanResponse::getFrameSize() {
     return sizeof(frame);
 }
 
-bool HanResponse::checksumOK() {
-    uint16_t theChecksum = ntohs(checksum((uint16_t *)&frame));
-    
-    printf("response checksum: %u\n", theChecksum);
-    if (frame.checksum == theChecksum) {
+bool HanResponse::checksumOK() {   
+    //printf("response checksum: %u\n", theChecksum);
+    if (frame.checksum == ntohs(checksum((uint16_t *)&frame))) {
         return true;
     }
     return false;
 }
 
+uint16_t HanResponse::getFrameLengthWithoutChecksumField() {
+    return sizeof(frame.flags) + sizeof(frame.keyIdentifier)
+            + sizeof(frame.userIdentifier) + sizeof(frame.code) + sizeof(frame.data)
+            - sizeof(frame.checksum);
+}
+
 uint16_t HanResponse::checksum(uint16_t* buf) {
-    uint16_t* temp = buf + getFrameSize() - sizeof(frame.checksum);
-    int sum;
+    uint16_t* temp = buf + getFrameLengthWithoutChecksumField();
+    uint16_t sum;
     for(sum = 0; buf < temp; buf++) {
         sum += *buf;
     }

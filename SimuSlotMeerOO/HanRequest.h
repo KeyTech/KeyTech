@@ -68,10 +68,10 @@ public:
 
 private:
     struct {
+        uint8_t flags;
         uint16_t keyIdentifier;
         uint32_t userIdentifier;
         uint16_t code;
-        uint8_t flags;
         uint8_t data;
         uint16_t checksum;
     } frame;
@@ -83,6 +83,7 @@ private:
     };
     
     uint16_t checksum(uint16_t *buf);
+    uint16_t getFrameLengthWithoutChecksumField();
 };
 
 #endif	/* HANREQUEST_H */

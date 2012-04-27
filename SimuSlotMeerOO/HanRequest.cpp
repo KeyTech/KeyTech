@@ -42,7 +42,7 @@ void HanRequest::setTestFrame(bool testFrame) {
 
 void *HanRequest::getFrame() {
     frame.checksum = htons(checksum((uint16_t *)&frame));
-    printf("Checksum value: %u\n", frame.checksum);
+    //printf("Checksum value: %u\n", frame.checksum);
     return (void *) &frame;
 }
 
@@ -50,9 +50,15 @@ uint32_t HanRequest::getFrameSize() {
     return sizeof(frame);
 }
 
-uint16_t HanRequest::checksum(uint16_t* buf) {
-    uint16_t* temp = buf + getFrameSize() - sizeof(frame.checksum);
-    int sum;
+uint16_t HanRequest::getFrameLengthWithoutChecksumField() {
+    return sizeof(frame.flags) + sizeof(frame.keyIdentifier)
+            + sizeof(frame.userIdentifier) + sizeof(frame.code) + sizeof(frame.data)
+            - sizeof(frame.checksum);
+}
+    
+uint16_t HanRequest::checksum(uint16_t *buf) {
+    uint16_t* temp = buf + getFrameLengthWithoutChecksumField();
+    uint16_t sum;
     for(sum = 0; buf < temp; buf++) {
         sum += *buf;
     }
