@@ -33,7 +33,7 @@ StateMachine::StateMachine(int argc, char** argv)
 
 bool StateMachine::init() {
     //SlotIO:
-    slotIO.SetDoorState(OPEN);
+	lockSimulator.SetDoorState(OPEN);
 
     return true;
 }
@@ -46,7 +46,7 @@ void StateMachine::runStateMachine() {
         switch(next_state){
             case IDLE:
                 cout << "Test state IDLE" << endl;
-                if(slotIO.detectEntry()){
+                if(lockSimulator.detectEntry()){
                     next_state = SEND;
                 } else {
                     next_state = IDLE;
@@ -54,7 +54,7 @@ void StateMachine::runStateMachine() {
                 break;
             case SEND:
                 cout << "Test state SEND" << endl;
-                if((messages_sent < 3) && (communicate.sendRequest(&saddr, sockfd, lockID, slotIO.getStudentID(), slotIO.getPin() )) ) {
+                if((messages_sent < 3) && (communicate.sendRequest(&saddr, sockfd, lockID, lockSimulator.getStudentId(), lockSimulator.getPin() )) ) {
                     next_state = RECEIVE;
                     cout << "Messages sent: " << messages_sent << endl;
                     messages_sent += 1;
@@ -79,7 +79,7 @@ void StateMachine::runStateMachine() {
                 break;
             case PROCESS_OUTPUT:
                 cout << "Test state PROCESS_OUTPUT" << endl;
-                if(slotIO.setOutput(flags) ) {
+                if(lockSimulator.setOutput(flags) ) {
                     next_state = IDLE;
                 } else {
                     next_state = SEND;

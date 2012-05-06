@@ -10,7 +10,7 @@
 
 #include "Defines.h"
 #include "HanResponse.h"
-#include "SlotIO.h"
+#include "LockSimulator.h"
 #include "Communicate.h"
 
 /*! \brief States:
@@ -46,7 +46,7 @@ public:
     
 private:
     Communicate communicate;
-    SlotIO slotIO;
+    LockSimulator lockSimulator;
     
     int next_state;
     struct sockaddr_in saddr;
