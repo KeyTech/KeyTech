@@ -49,11 +49,7 @@ void HanRequest::setLockStatus(bool lockStatus) {
 }
 
 bool HanRequest::isLocked() {
-	if(frame[FLAGS] && LOCKED) {
-		return false;
-	}
-
-	return true;
+	return !(frame[FLAGS] && LOCKED);
 }
 
 void HanRequest::setTestFrame(bool testFrame) {
@@ -65,9 +61,5 @@ void HanRequest::setTestFrame(bool testFrame) {
 }
 
 bool HanRequest::isTestFrame() {
-	if(frame[FLAGS] && TEST_FRAME) {
-		return true;
-	}
-
-	return false;
+	return (frame[FLAGS] && TEST_FRAME);
 }
