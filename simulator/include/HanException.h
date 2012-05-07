@@ -1,11 +1,15 @@
 #ifndef HANEXCEPTION_H
 #define	HANEXCEPTION_H
 
-#include "Exception.h"
+#include <cstdlib>
 
-class HanException : public Exception {
+class HanException {
 public:
-    HanException(char *message): Exception(message) {}
+	HanException(string message);
+    string getMessage();
+
+private:
+    string message;
 };
 
-#endif	/* HANEXCEPTION_H */
+#endif
