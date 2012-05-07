@@ -1,4 +1,4 @@
-#include "gtest/gtest.h"
+#include "googletest/gtest/gtest.h"
 #include "HanResponse.h"
 #include "Defines.h"
 
