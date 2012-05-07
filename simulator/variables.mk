@@ -22,7 +22,7 @@ OBJ_FILES = $(CPP_FILES:%.cpp=$(OBJ_DIR)/%.o)
 TEST_OBJ_FILES = $(TEST_CPP_FILES:%.cpp=$(TEST_OBJ_DIR)/%.o)
 DEBUG_OBJ_FILES = $(CPP_FILES:%.cpp=$(DEBUG_OBJ_DIR)/%.o)
 
-GTEST_CPP_FILES := contrib/gtest/gtest-all.cc
+GTEST_CPP_FILES := contrib/googletest/gmock-gtest-all.cc
 MAIN_DEBUG_OBJ := $(DEBUG_OBJ_DIR)/main.o
 
 # Includes:
