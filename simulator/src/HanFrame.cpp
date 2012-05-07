@@ -1,5 +1,6 @@
 #include <strings.h>
 #include <arpa/inet.h>
+#include <string.h>
 
 #include "HanFrame.h"
 
@@ -15,6 +16,10 @@ void *HanFrame::getFrame() {
 
 int HanFrame::getFrameSize() {
     return sizeof (frame);
+}
+
+void HanFrame::setFrame(void *frame) {
+	memcpy(this->frame, frame, getFrameSize());
 }
 
 uint16_t HanFrame::calculateChecksum() {

@@ -6,7 +6,8 @@
 HanResponse::HanResponse() : HanFrame() {}
 
 uint16_t HanResponse::getKeyIdentifier() {
-    return ntohs((uint16_t) frame[KEY_IDENTIFIER]);
+	uint16_t *keyIdentifier = (uint16_t *) &frame[KEY_IDENTIFIER];
+    return ntohs(*keyIdentifier);
 }
 
 void HanResponse::setKeyIdentifier(uint16_t keyIdentifier) {
@@ -15,7 +16,8 @@ void HanResponse::setKeyIdentifier(uint16_t keyIdentifier) {
 }
 
 uint32_t HanResponse::getUserIdentifier() {
-    return ntohl((uint32_t) frame[USER_IDENTIFIER]);
+	uint32_t *userIdentifier = (uint32_t *) &frame[USER_IDENTIFIER];
+    return ntohl(*userIdentifier);
 }
 
 void HanResponse::setUserIdentifier(uint32_t userIdentifier) {

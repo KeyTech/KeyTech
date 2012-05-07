@@ -18,6 +18,13 @@ public:
      */
     int getFrameSize();
 
+    /**
+     * Sets the frame.
+     * @param frame Pointer to the frame. Should have a size equal to the framesize.
+     * @see getFrameSize()
+     */
+    void setFrame(void *frame);
+
 protected:
     enum frameDefinition {
         CHECKSUM = 10,

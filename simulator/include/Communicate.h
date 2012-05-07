@@ -30,24 +30,10 @@
 #define TEST_FRAME_ANSWER 0b00100000
 
 class Communicate {
-    typedef struct frame {
-        uint8_t flags;
-        uint16_t keyIdentifier;
-        uint32_t userIdentifier;
-        uint16_t code;
-        uint8_t data;
-        uint16_t checksum;
-    } frame2;
 public:
-    Communicate();
-    ~Communicate();
     
     bool sendRequest(struct sockaddr_in *sad, int sd, uint16_t lockID, uint32_t userID, uint16_t code);
     uint8_t receiveResponse(struct sockaddr_in *sad, uint32_t sd, uint16_t lockID);
-    
-private:
-    size_t serialize(const frame* arch, char* buf);
-    void deserialize(frame* arch, const char* buf);
 };
 
 #endif	/* COMMUNICATE_H */
