@@ -10,15 +10,18 @@
 StateMachine::StateMachine(int argc, char** argv)
 : next_state(INIT)
 {
+	cout << "FSM state : " << next_state;
     cout << "State Machine started." << endl;
         //Com settings:
     bzero(&saddr, sizeof(struct sockaddr_in));
     if(argc == 4) {
         saddr.sin_family = AF_INET;
+
         if(inet_pton(AF_INET, argv[1], &saddr.sin_addr) < 0 ) {
             perror("inet_pton error in init.");
             exit(ERR_INET_PTON);
         }
+
         saddr.sin_port = htons(atoi(argv[2]));
         if( (sockfd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) <0) {
             perror("Socket creation error");
