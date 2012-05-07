@@ -1,0 +1,436 @@
+# EESchema Netlist Version 1.1 created  5/07/2010 5:30:16 PM
+(
+ ( /4C316BBF SM1206 C1 18pF
+  ( 1 N-000024 )
+  ( 2 GND )
+ )
+ ( /4C316BC6 SM1206 C2 18pF
+  ( 1 N-000025 )
+  ( 2 GND )
+ )
+ ( /4C316C18 SM1206 C3 100nF
+  ( 1 N-000026 )
+  ( 2 N-000052 )
+ )
+ ( /4C316D83 SM1206 C4 100nF
+  ( 1 VCC )
+  ( 2 GND )
+ )
+ ( /4C316D8B SM1206POL C5 10uF
+  ( 1 +3.3V )
+  ( 2 GND )
+ )
+ ( /4C317A5E SM1206 C6 18pF
+  ( 1 N-000040 )
+  ( 2 GND )
+ )
+ ( /4C317A62 SM1206 C7 18pF
+  ( 1 N-000039 )
+  ( 2 GND )
+ )
+ ( /4C3178EE SM1206 C8 100nF
+  ( 1 N-000036 )
+  ( 2 GND )
+ )
+ ( /4C3178F4 SM1206 C9 100nF
+  ( 1 N-000035 )
+  ( 2 GND )
+ )
+ ( /4C316D7D SM1206POL C10 10uF
+  ( 1 N-000050 )
+  ( 2 GND )
+ )
+ ( /4C31756A SM1206POL C11 10uF
+  ( 1 N-000016 )
+  ( 2 GND )
+ )
+ ( /4C316D46 D3 D1 1N4004
+  ( 1 N-000051 )
+  ( 2 N-000050 )
+ )
+ ( /4C317AB3 LED-5MM D2 LED
+  ( 1 N-000008 )
+  ( 2 GND )
+ )
+ ( /4C316F0D LED-3MM D3 LED
+  ( 1 N-000027 )
+  ( 2 N-000049 )
+ )
+ ( /4C316F15 LED-3MM D4 LED
+  ( 1 N-000023 )
+  ( 2 N-000048 )
+ )
+ ( /4C316BA8 DIP-28__300_ELL IC1 ATMEGA168-P
+  ( 1 N-000052 )
+  ( 2 N-000023 )
+  ( 3 N-000027 )
+  ( 4 N-000020 )
+  ( 5 N-000021 )
+  ( 6 N-000022 )
+  ( 7 VCC )
+  ( 8 GND )
+  ( 9 N-000024 )
+  ( 10 N-000025 )
+  ( 11 N-000019 )
+  ( 12 N-000031 )
+  ( 13 N-000018 )
+  ( 14 N-000032 )
+  ( 15 ? )
+  ( 16 N-000015 )
+  ( 17 N-000014 )
+  ( 18 N-000030 )
+  ( 19 N-000034 )
+  ( 20 VCC )
+  ( 21 ? )
+  ( 22 GND )
+  ( 23 N-000028 )
+  ( 24 N-000029 )
+  ( 25 N-000003 )
+  ( 26 N-000004 )
+  ( 27 N-000005 )
+  ( 28 N-000006 )
+ )
+ ( /4C317780 RJ45-MAG J1 RJ45-MAG
+  ( 1 N-000001 )
+  ( 2 N-000012 )
+  ( 3 N-000035 )
+  ( 4 ? )
+  ( 5 ? )
+  ( 6 ? )
+  ( 7 N-000037 )
+  ( 8 N-000002 )
+  ( 9 GND )
+  ( 10 GND )
+  ( 11 N-000009 )
+  ( 12 GND )
+  ( 13 N-000011 )
+  ( 14 GND )
+ )
+ ( /4C31790A R3-LARGE_PADS L1 Ferrite_Bead
+  ( 1 N-000035 )
+  ( 2 +3.3V )
+ )
+ ( /4C316B50 SIL-6 P1 CONN_6
+  ( 1 N-000026 )
+  ( 2 N-000027 )
+  ( 3 N-000023 )
+  ( 4 VCC )
+  ( 5 GND )
+  ( 6 GND )
+ )
+ ( /4C316D33 SIL-2 P2 CONN_2
+  ( 1 GND )
+  ( 2 N-000051 )
+ )
+ ( /4C3171DE SIL-5 P3 CONN_5
+  ( 1 N-000019 )
+  ( 2 N-000031 )
+  ( 3 N-000018 )
+  ( 4 N-000032 )
+  ( 5 GND )
+ )
+ ( /4C3170B8 SIL-10 P4 CONN_10
+  ( 1 VCC )
+  ( 2 GND )
+  ( 3 N-000022 )
+  ( 4 N-000028 )
+  ( 5 N-000021 )
+  ( 6 N-000029 )
+  ( 7 N-000003 )
+  ( 8 N-000004 )
+  ( 9 N-000005 )
+  ( 10 N-000006 )
+ )
+ ( /4C316C23 R3-LARGE_PADS R1 10K
+  ( 1 VCC )
+  ( 2 N-000052 )
+ )
+ ( /4C317524 R3-LARGE_PADS R2 10K
+  ( 1 VCC )
+  ( 2 N-000015 )
+ )
+ ( /4C31752A R3-LARGE_PADS R3 10K
+  ( 1 VCC )
+  ( 2 N-000052 )
+ )
+ ( /4C317AAE R3-LARGE_PADS R4 270R
+  ( 1 VCC )
+  ( 2 N-000008 )
+ )
+ ( /4C3177C8 R3-LARGE_PADS R5 50R
+  ( 1 N-000035 )
+  ( 2 N-000001 )
+ )
+ ( /4C3177D1 R3-LARGE_PADS R6 50R
+  ( 1 N-000035 )
+  ( 2 N-000012 )
+ )
+ ( /4C3177DB R3-LARGE_PADS R7 50R
+  ( 1 N-000036 )
+  ( 2 N-000037 )
+ )
+ ( /4C3178D8 R3-LARGE_PADS R8 50R
+  ( 1 N-000036 )
+  ( 2 N-000002 )
+ )
+ ( /4C317A0F R3-LARGE_PADS R9 270R
+  ( 1 N-000009 )
+  ( 2 N-000038 )
+ )
+ ( /4C317A14 R3-LARGE_PADS R10 270R
+  ( 1 N-000011 )
+  ( 2 N-000010 )
+ )
+ ( /4C317563 R3-LARGE_PADS R11 2k7
+  ( 1 N-000044 )
+  ( 2 GND )
+ )
+ ( /4C3171EC R3-LARGE_PADS R12 2k7
+  ( 1 VCC )
+  ( 2 N-000031 )
+ )
+ ( /4C31702D R3-LARGE_PADS R13 270R
+  ( 1 GND )
+  ( 2 N-000049 )
+ )
+ ( /4C317033 R3-LARGE_PADS R14 270R
+  ( 1 GND )
+  ( 2 N-000048 )
+ )
+ ( /4C316C97 SW_PUSH_SMALL SW1 Reset
+  ( 1 GND )
+  ( 2 N-000052 )
+ )
+ ( /4C3176CF SWDIP4 SW2 DIPS_04
+  ( 1 N-000006 )
+  ( 2 N-000005 )
+  ( 3 N-000004 )
+  ( 4 N-000003 )
+  ( 5 GND )
+  ( 6 GND )
+  ( 7 GND )
+  ( 8 GND )
+ )
+ ( /4C317161 SO14N U1 74LS08
+  ( 1 N-000033 )
+  ( 2 N-000033 )
+  ( 3 N-000020 )
+  ( 4 N-000017 )
+  ( 5 N-000017 )
+  ( 6 N-000030 )
+  ( 7 GND )
+  ( 14 VCC )
+ )
+ ( /4C316D40 LM78LXX U2 78L05
+  ( GND GND )
+  ( VI N-000050 )
+  ( VO VCC )
+ )
+ ( /4C3174CE DIP-28__300_ELL U3 ENC28J60-DIL
+  ( 1 N-000016 )
+  ( 2 GND )
+  ( 3 ? )
+  ( 4 N-000033 )
+  ( 5 ? )
+  ( 6 N-000017 )
+  ( 7 N-000014 )
+  ( 8 N-000034 )
+  ( 9 N-000015 )
+  ( 10 N-000052 )
+  ( 11 GND )
+  ( 12 N-000002 )
+  ( 13 N-000037 )
+  ( 14 N-000044 )
+  ( 15 +3.3V )
+  ( 16 N-000012 )
+  ( 17 N-000001 )
+  ( 18 GND )
+  ( 19 +3.3V )
+  ( 20 +3.3V )
+  ( 21 GND )
+  ( 22 GND )
+  ( 23 N-000039 )
+  ( 24 N-000040 )
+  ( 25 +3.3V )
+  ( 26 N-000010 )
+  ( 27 N-000038 )
+  ( 28 +3.3V )
+ )
+ ( /4C316D61 LM78LXX U4 78L33
+  ( GND GND )
+  ( VI VCC )
+  ( VO +3.3V )
+ )
+ ( /4C316BB6 HC-18UV X1 16Mhz
+  ( 1 N-000024 )
+  ( 2 N-000025 )
+ )
+ ( /4C317A55 HC-18UV X2 25Mhz
+  ( 1 N-000040 )
+  ( 2 N-000039 )
+ )
+)
+*
+{ Allowed footprints by component:
+$component C1
+ SM*
+ C?
+ C1-1
+$endlist
+$component C2
+ SM*
+ C?
+ C1-1
+$endlist
+$component C3
+ SM*
+ C?
+ C1-1
+$endlist
+$component C4
+ SM*
+ C?
+ C1-1
+$endlist
+$component C5
+ CP*
+ SM*
+$endlist
+$component C6
+ SM*
+ C?
+ C1-1
+$endlist
+$component C7
+ SM*
+ C?
+ C1-1
+$endlist
+$component C8
+ SM*
+ C?
+ C1-1
+$endlist
+$component C9
+ SM*
+ C?
+ C1-1
+$endlist
+$component C10
+ CP*
+ SM*
+$endlist
+$component C11
+ CP*
+ SM*
+$endlist
+$component D1
+ D?
+ S*
+$endlist
+$component D2
+ LED-3MM
+ LED-5MM
+ LED-10MM
+ LED-0603
+ LED-0805
+ LED-1206
+ LEDV
+$endlist
+$component D3
+ LED-3MM
+ LED-5MM
+ LED-10MM
+ LED-0603
+ LED-0805
+ LED-1206
+ LEDV
+$endlist
+$component D4
+ LED-3MM
+ LED-5MM
+ LED-10MM
+ LED-0603
+ LED-0805
+ LED-1206
+ LEDV
+$endlist
+$component IC1
+ 28DIP-ELL600
+ 28dip600
+$endlist
+$component J1
+ RJ45_Mag
+$endlist
+$component R1
+ R?
+ SM0603
+ SM0805
+$endlist
+$component R2
+ R?
+ SM0603
+ SM0805
+$endlist
+$component R3
+ R?
+ SM0603
+ SM0805
+$endlist
+$component R4
+ R?
+ SM0603
+ SM0805
+$endlist
+$component R5
+ R?
+ SM0603
+ SM0805
+$endlist
+$component R6
+ R?
+ SM0603
+ SM0805
+$endlist
+$component R7
+ R?
+ SM0603
+ SM0805
+$endlist
+$component R8
+ R?
+ SM0603
+ SM0805
+$endlist
+$component R9
+ R?
+ SM0603
+ SM0805
+$endlist
+$component R10
+ R?
+ SM0603
+ SM0805
+$endlist
+$component R11
+ R?
+ SM0603
+ SM0805
+$endlist
+$component R12
+ R?
+ SM0603
+ SM0805
+$endlist
+$component R13
+ R?
+ SM0603
+ SM0805
+$endlist
+$component R14
+ R?
+ SM0603
+ SM0805
+$endlist
+$endfootprintlist
+}
