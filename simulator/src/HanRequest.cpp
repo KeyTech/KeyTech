@@ -11,7 +11,8 @@ HanRequest::HanRequest() : HanFrame() {}
 
 
 uint16_t HanRequest::getKeyIdentifier() {
-    return ntohs((uint16_t) frame[KEY_IDENTIFIER]);
+    uint16_t *keyIdentifier = (uint16_t *) &frame[KEY_IDENTIFIER];
+    return ntohs(* keyIdentifier);
 }
 
 void HanRequest::setKeyIdentifier(uint16_t keyIdentifier) {
@@ -20,7 +21,8 @@ void HanRequest::setKeyIdentifier(uint16_t keyIdentifier) {
 }
 
 uint32_t HanRequest::getUserIdentifier() {
-    return ntohl((uint32_t) frame[USER_IDENTIFIER]);
+    uint32_t *userIdentifier = (uint32_t *) &frame[USER_IDENTIFIER];
+    return ntohl(*userIdentifier);
 }
 
 void HanRequest::setUserIdentifier(uint32_t userIdentifier) {
@@ -33,8 +35,25 @@ void HanRequest::setCode(uint16_t code) {
     *location = htons(code);
 }
 
+uint16_t HanRequest::getCode() {
+    uint16_t *code = (uint16_t *) &frame[PINCODE];
+    return ntohs(*code);
+}
+
 void HanRequest::setLockStatus(bool lockStatus) {
-    //TODO
+    if(lockStatus) {
+        frame[FLAGS] &= ~LOCKED;
+    } else {
+        frame[FLAGS] |= LOCKED;
+    }
+}
+
+bool HanRequest::isLocked() {
+	if(frame[FLAGS] && LOCKED) {
+		return false;
+	}
+
+	return true;
 }
 
 void HanRequest::setTestFrame(bool testFrame) {
@@ -43,4 +62,12 @@ void HanRequest::setTestFrame(bool testFrame) {
     } else {
         frame[FLAGS] &= ~TEST_FRAME;
     }
+}
+
+bool HanRequest::isTestFrame() {
+	if(frame[FLAGS] && TEST_FRAME) {
+		return true;
+	}
+
+	return false;
 }

@@ -72,7 +72,7 @@ private:
     enum flags {
         TEST_FRAME = 0b00000001,
         INCORRECT_CHECKSUM = 0b00000010,
-        UNLOCKED = 0b00000100
+        LOCKED = 0b00000100
     };
 };
 
