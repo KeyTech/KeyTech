@@ -12,6 +12,11 @@
 #include "HanResponse.h"
 #include "Defines.h"
 
+class HanException {
+public:
+    string getMessage();
+};
+
 /*! \brief Request flags:
  * 
  */
@@ -31,9 +36,15 @@
 
 class Communicate {
 public:
+    Communicate(string server_address, uint16_t port, uint16_t lock_number);
     
-    bool sendRequest(struct sockaddr_in *sad, int sd, uint16_t lockID, uint32_t userID, uint16_t code);
-    uint8_t receiveResponse(struct sockaddr_in *sad, uint32_t sd, uint16_t lockID);
+    ResponseAnswer sendRequest(uint32_t userID, uint16_t code) throw (HanException);
+    bool sendTestRequest();
+    
+private:
+    string server_address;
+    uint16_t port;
+    uint16_t lock_number;
 };
 
 #endif	/* COMMUNICATE_H */
