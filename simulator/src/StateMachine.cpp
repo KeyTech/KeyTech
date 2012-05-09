@@ -17,7 +17,7 @@ StateMachine::StateMachine(int argc, char** argv)
         communicate = new Communicate(argv[1], (uint16_t) atoi(argv[2]), (uint16_t) atoi(argv[3]) );
     } catch (HanException ex) {
         ex.getMessage();
-        exit(EXIT_FAILURE);
+        exit(EXIT_FAILURE); //Using exit() for now, till a better solution has been thought of.
     }
     lockSimulator = new LockSimulator();
 }
@@ -26,9 +26,9 @@ bool StateMachine::init() {
     //SlotIO:
 	lockSimulator->SetDoorState(OPEN);
     if(communicate->sendTestRequest()){
-        return true;
+        return true; //Test frame succesful, start normal operations.
     } else {
-        return false;
+        return false; //Test frame failed, redo init.
     }
 }
 
@@ -47,7 +47,7 @@ void StateMachine::runStateMachine() {
                 break;
             case COMMUNICATE:
                 try {
-                    answer = communicate->sendRequest();
+                    answer = communicate->sendRequest(lockSimulator->getStudentId(), lockSimulator->getPin());
                     next_state = PROCESS_OUTPUT;
                 } catch (HanException ex) {
                     next_state = ERROR;

@@ -1,7 +1,9 @@
 #ifndef HANEXCEPTION_H
 #define	HANEXCEPTION_H
 
-#include <cstdlib>
+#include <string>
+
+using namespace std;
 
 class HanException {
 public:

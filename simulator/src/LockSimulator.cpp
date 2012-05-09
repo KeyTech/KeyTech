@@ -39,7 +39,7 @@ bool LockSimulator::detectEntry() {
 
 bool LockSimulator::setOutput(ResponseAnswer flags) {
 	switch (flags) {
-		case ResponseAnswer.PERMISSION_GRANTED:
+		case PERMISSION_GRANTED:
 			cout << "Permission to change door state granted." << endl;
 			if (GetDoorState()) { //OPEN == true.
 				SetDoorState(CLOSED);
@@ -49,13 +49,13 @@ bool LockSimulator::setOutput(ResponseAnswer flags) {
 				cout << "Door is now unlocked." << endl;
 			}
 			return true;
-		case ResponseAnswer.INCORRECT_ID:
+		case INCORRECT_ID:
 			cout << "ID incorrect." << endl;
 			return true;
-		case ResponseAnswer.NO_ACCESS:
+		case NO_ACCESS:
 			cout << "Unauthorized access at this time." << endl;
 			return true;
-		case ResponseAnswer.USER_BLOCKED:
+		case USER_BLOCKED:
 			cout << "Too many attempts done. You have been banned for x time." << endl;
 			return true;
 		default:
