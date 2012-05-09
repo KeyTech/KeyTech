@@ -12,77 +12,51 @@ StateMachine::StateMachine(int argc, char** argv)
 {
 	cout << "FSM state : " << next_state;
     cout << "State Machine started." << endl;
-        //Com settings:
-    bzero(&saddr, sizeof(struct sockaddr_in));
-    if(argc == 4) {
-        saddr.sin_family = AF_INET;
-
-        if(inet_pton(AF_INET, argv[1], &saddr.sin_addr) < 0 ) {
-            perror("inet_pton error in init.");
-            exit(ERR_INET_PTON);
-        }
-
-        saddr.sin_port = htons(atoi(argv[2]));
-        if( (sockfd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) <0) {
-            perror("Socket creation error");
-        }
-    } else {
-        cout << "Incorrect number of parameters. Enter server IP, port number and lock no." << endl;
-        exit(INCORRECT_NO_ARGUMENTS);
+    
+    try {
+        communicate = new Communicate(argv[1], (uint16_t) atoi(argv[2]), (uint16_t) atoi(argv[3]) );
+    } catch (HanException ex) {
+        ex.getMessage();
+        exit(EXIT_FAILURE);
     }
-        //lockID:
-    lockID = atoi(argv[3]);
+    lockSimulator = new LockSimulator();
 }
 
 bool StateMachine::init() {
     //SlotIO:
-	lockSimulator.SetDoorState(OPEN);
-
-    return true;
+	lockSimulator->SetDoorState(OPEN);
+    if(communicate->sendTestRequest()){
+        return true;
+    } else {
+        return false;
+    }
 }
 
 void StateMachine::runStateMachine() {
-    uint8_t flags = 0;
-    int messages_sent = 0;
+    ResponseAnswer answer;
     while(true){
         //cout << "Next_state: " << next_state << endl;
         switch(next_state){
             case IDLE:
                 cout << "Test state IDLE" << endl;
-                if(lockSimulator.detectEntry()){
+                if(lockSimulator->detectEntry()){
                     next_state = SEND;
                 } else {
                     next_state = IDLE;
                 }
                 break;
-            case SEND:
-                cout << "Test state SEND" << endl;
-                if((messages_sent < 3) && (communicate.sendRequest(&saddr, sockfd, lockID, lockSimulator.getStudentId(), lockSimulator.getPin() )) ) {
-                    next_state = RECEIVE;
-                    cout << "Messages sent: " << messages_sent << endl;
-                    messages_sent += 1;
-                } else if(messages_sent >= 3) {
-                    cout << "Max attempts reached." << endl;
-                    next_state = IDLE;
-                    messages_sent = 0;
-                } else {
-                    next_state = SEND;
-                    cout << "Messages sent: " << messages_sent << endl;
-                    messages_sent += 1;
-                }
-                break;
-            case RECEIVE:
-                cout << "Test state RECEIVE" << endl;
-                if((flags = communicate.receiveResponse(&saddr, sockfd, lockID)) > 0 ) {
+            case COMMUNICATE:
+                try {
+                    answer = communicate->sendRequest();
                     next_state = PROCESS_OUTPUT;
-                    messages_sent = 0;
-                } else {
-                    next_state = SEND;
+                } catch (HanException ex) {
+                    next_state = ERROR;
+                    ex.getMessage();
                 }
                 break;
             case PROCESS_OUTPUT:
                 cout << "Test state PROCESS_OUTPUT" << endl;
-                if(lockSimulator.setOutput(flags) ) {
+                if(lockSimulator->setOutput(answer) ) {
                     next_state = IDLE;
                 } else {
                     next_state = SEND;

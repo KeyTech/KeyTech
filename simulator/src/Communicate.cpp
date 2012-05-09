@@ -1,5 +1,9 @@
 #include "Communicate.h"
 
+Communicate::Communicate(string server_address, uint16_t port, uint16_t lock_number){
+    
+}
+
 bool Communicate::sendRequest(struct sockaddr_in *serverAddress, int socketDescriptor, uint16_t lockID, uint32_t userID, uint16_t code) {
     HanRequest request;
     int sent_bytes = 0;
