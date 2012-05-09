@@ -9,7 +9,6 @@
 #define	STATEMACHINE_H
 
 #include "Defines.h"
-#include "HanResponse.h"
 #include "LockSimulator.h"
 #include "Communicate.h"
 
@@ -22,6 +21,7 @@
 #define RECEIVE 3
 #define PROCESS_OUTPUT 4
 #define ERROR 5
+#define COMMUNICATE 6
 
 class StateMachine {
 public:
@@ -45,14 +45,10 @@ public:
     void runStateMachine();
     
 private:
-    Communicate communicate;
-    LockSimulator lockSimulator;
+    Communicate *communicate;
+    LockSimulator *lockSimulator;
     
     int next_state;
-    struct sockaddr_in saddr;
-    int sockfd;
-    int lockID;
-
 };
 
 #endif	/* STATEMACHINE_H */

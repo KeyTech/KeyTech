@@ -37,9 +37,9 @@ bool LockSimulator::detectEntry() {
 	}
 }
 
-int LockSimulator::setOutput(uint8_t flags) {
+bool LockSimulator::setOutput(ResponseAnswer flags) {
 	switch (flags) {
-		case PERMISSION_GRANTED:
+		case ResponseAnswer.PERMISSION_GRANTED:
 			cout << "Permission to change door state granted." << endl;
 			if (GetDoorState()) { //OPEN == true.
 				SetDoorState(CLOSED);
@@ -49,24 +49,17 @@ int LockSimulator::setOutput(uint8_t flags) {
 				cout << "Door is now unlocked." << endl;
 			}
 			return true;
-		case ERR_ID_INCORRECT:
+		case ResponseAnswer.INCORRECT_ID:
 			cout << "ID incorrect." << endl;
 			return true;
-		case ERR_UNAUTHORISED:
+		case ResponseAnswer.NO_ACCESS:
 			cout << "Unauthorized access at this time." << endl;
 			return true;
-		case ERR_BLOCKED:
-			cout << "Too many attempts done. You have been banned for x time."
-					<< endl;
-			return true;
-		case ERR_SERVER_CHECKSUM:
-			cout << "Server message checksum failed." << endl;
-			return false;
-		case TEST_FRAME_ANSWER:
-			cout << "The test frame was sent successfully ." << endl;
+		case ResponseAnswer.USER_BLOCKED:
+			cout << "Too many attempts done. You have been banned for x time." << endl;
 			return true;
 		default:
-			cout << "No known response flag." << endl;
+			cout << "No known response answer." << endl;
 			return false;
 	}
 }
