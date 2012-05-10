@@ -8,29 +8,41 @@
 #include "Mocks.h"
 
 TEST(LockSimulatorTest, testSetOutput)  {
-	LockSimulator ls;
+	ifstream stream("/home/hanna/KeyTech/simulator/test/open.txt");
 
-	ls.SetDoorState(OPEN);
+	if (stream.is_open())	cout << "file opened" << endl;
+	else					cout << "file not opened";
 
-	ls.setOutput(PERMISSION_GRANTED);
-	EXPECT_FALSE(ls.GetDoorState());
+	LockSimulator ls(&stream);
+	ls.detectEntry();
 
-	EXPECT_TRUE(ls.setOutput(ERR_UNAUTHORISED));
+	EXPECT_EQ(ls.getStudentId(), (unsigned int)474296);
+	EXPECT_EQ(ls.getPin(), (unsigned int)1234);
 
 }
 
 TEST(LockSimulatorTest, testGetStudentId)  {
-	LockSimulator ls;
+	ifstream stream("/home/hanna/KeyTech/simulator/test/open.txt");
+
+	if (stream.is_open())	cout << "file opened" << endl;
+	else					cout << "file not opened";
+
+	LockSimulator ls(&stream);
 	ls.detectEntry();
 
-	EXPECT_EQ(ls.getStudentId(), (unsigned int)0);
+	EXPECT_EQ(ls.getStudentId(), (unsigned int)474296);
 }
 
 TEST(LockSimulatorTest, testGetPin)  {
-	LockSimulator ls;
+	ifstream stream("/home/hanna/KeyTech/simulator/test/open.txt");
+
+	if (stream.is_open())	cout << "file opened" << endl;
+	else					cout << "file not opened";
+
+	LockSimulator ls(&stream);
 	ls.detectEntry();
 
-	EXPECT_EQ(ls.getPin(), (unsigned int)0);
+	EXPECT_EQ(ls.getPin(), (unsigned int)1234);
 }
 
 TEST(LockSimulatorTest, testGetDoorState)  {

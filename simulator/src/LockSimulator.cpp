@@ -11,6 +11,13 @@
 
 using namespace std;
 
+LockSimulator::LockSimulator(istream *is) :
+	stream(is) {}
+
+LockSimulator::LockSimulator()	{
+	stream = &cin;
+}
+
 bool LockSimulator::detectEntry() {
 	studentID = 0;
 	pin = 0;
@@ -18,11 +25,11 @@ bool LockSimulator::detectEntry() {
 	string input;
 
 	cout << "Please enter your 6 digit student ID." << endl;
-	getline(cin, input);
+	getline(*stream, input);
 	studentID = atoi(input.c_str());
 
 	cout << "Please enter your 4 digit pin code." << endl;
-	getline(cin, input);
+	getline(*stream, input);
 	pin = atoi(input.c_str());
 
 	//test to see if I get it right:

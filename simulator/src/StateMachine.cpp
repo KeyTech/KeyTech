@@ -40,7 +40,7 @@ void StateMachine::runStateMachine() {
             case IDLE:
                 cout << "Test state IDLE" << endl;
                 if(lockSimulator->detectEntry()){
-                    next_state = SEND;
+                    next_state = COMMUNICATE;
                 } else {
                     next_state = IDLE;
                 }

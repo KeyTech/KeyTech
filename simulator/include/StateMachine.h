@@ -11,6 +11,7 @@
 #include "Defines.h"
 #include "LockSimulator.h"
 #include "Communicate.h"
+#include "HanException.h"
 
 /*! \brief States:
  * 

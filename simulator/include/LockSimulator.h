@@ -6,7 +6,12 @@
 
 class LockSimulator {
 public:
-    
+
+
+	LockSimulator(istream *is);
+
+	LockSimulator();
+
     /**
      * Processes the input given by users.
      * @return next_state Returns the next state to be executed by the state machine.
@@ -59,6 +64,7 @@ private:
     uint32_t studentID;
     uint16_t pin;
     bool door_state;
+    istream *stream;
 };
 
 #endif	/* SLOTIO_H */
