@@ -30,6 +30,10 @@ ResponseAnswer Communicate::sendRequest(uint32_t userIdentifier, uint16_t pincod
     request.setCode(pincode);
     request.setUserIdentifier(userIdentifier);
     
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 7d78986bb93558200d9811fe5635f9e8bea0a98f
     if(sendto(socketDescriptor, request.getFrame(), request.getFrameSize(), 0, (const struct sockaddr*) &serverAddress, addressLength) != request.getFrameSize()) {
         throw HanException("Could not sent to server.");
     }
