@@ -10,7 +10,6 @@
 StateMachine::StateMachine(int argc, char** argv)
 : next_state(INIT)
 {
-	cout << "FSM state : " << next_state;
     cout << "State Machine started." << endl;
     
     try {
@@ -20,6 +19,24 @@ StateMachine::StateMachine(int argc, char** argv)
         exit(EXIT_FAILURE); //Using exit() for now, till a better solution has been thought of.
     }
     lockSimulator = new LockSimulator();
+}
+
+StateMachine::StateMachine(int argc, char** argv, istream *is)
+: stream(is), next_state(INIT)
+{
+
+	cout << "FSM state : " << next_state;
+	cout << "State Machine started." << endl;
+
+	try {
+	        communicate = new Communicate(argv[1], (uint16_t) atoi(argv[2]), (uint16_t) atoi(argv[3]) );
+	} catch (HanException ex) {
+	        ex.getMessage();
+	        exit(EXIT_FAILURE); //Using exit() for now, till a better solution has been thought of.
+	}
+
+	lockSimulator = new LockSimulator(stream);
+
 }
 
 bool StateMachine::init() {

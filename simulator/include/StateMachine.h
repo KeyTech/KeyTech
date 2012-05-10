@@ -34,6 +34,14 @@ public:
      */
     StateMachine(int argc, char** argv);
 
+    /**
+     * Constructor
+     * @param argc the number of command line arguments entered.
+     * @param argv the arguments themselves.
+     * @param is is the stream to read from.
+     */
+    StateMachine(int argc, char** argv, istream *is);
+
     /** Init
     * 
     * \return True when init successful, false if it failed.
@@ -48,7 +56,7 @@ public:
 private:
     Communicate *communicate;
     LockSimulator *lockSimulator;
-    
+    istream *stream;
     int next_state;
 };
 

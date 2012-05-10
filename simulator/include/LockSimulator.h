@@ -7,9 +7,15 @@
 class LockSimulator {
 public:
 
-
+	/**
+	 * Constructor.
+	 * @param is is the stream to read from.
+	 */
 	LockSimulator(istream *is);
 
+	/**
+    * Constructor.
+	*/
 	LockSimulator();
 
     /**

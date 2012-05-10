@@ -30,7 +30,6 @@ ResponseAnswer Communicate::sendRequest(uint32_t userIdentifier, uint16_t pincod
     request.setCode(pincode);
     request.setUserIdentifier(userIdentifier);
     
-    /*
     if(sendto(socketDescriptor, request.getFrame(), request.getFrameSize(), 0, (const struct sockaddr*) &serverAddress, addressLength) != request.getFrameSize()) {
         throw HanException("Could not sent to server.");
     }
@@ -44,7 +43,7 @@ ResponseAnswer Communicate::sendRequest(uint32_t userIdentifier, uint16_t pincod
         throw HanException("Received incorrect response from server.");
     }
 
-    return response.getAnswer();*/
+    return response.getAnswer();
 }
 
 bool Communicate::sendTestRequest() {

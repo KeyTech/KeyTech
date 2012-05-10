@@ -12,14 +12,15 @@
 using namespace std;
 
 LockSimulator::LockSimulator(istream *is) :
-	stream(is) {}
+	stream(is) {
+}
 
 LockSimulator::LockSimulator()	{
 	stream = &cin;
 }
 
 bool LockSimulator::detectEntry() {
-	studentID = 0;
+	studentID = 1;
 	pin = 0;
 
 	string input;
