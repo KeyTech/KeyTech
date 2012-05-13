@@ -19,9 +19,9 @@ public:
     bool sendTestRequest();
     
 private:
-    void sendData(HanRequest request) throw(HanException);
-    void receiveData(HanResponse response) throw(HanException);
-    void sendAndReceiveData(HanRequest request, HanResponse response) throw (HanException);
+    void sendData(HanRequest *request) throw(HanException);
+    void receiveData(HanResponse *response) throw(HanException);
+    void sendAndReceiveData(HanRequest *request, HanResponse *response) throw (HanException);
 
     UdpClient *client;
 

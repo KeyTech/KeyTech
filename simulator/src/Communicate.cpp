@@ -28,7 +28,7 @@ ResponseAnswer Communicate::sendRequest(uint32_t userIdentifier, uint16_t pincod
     request.setCode(pincode);
     request.setUserIdentifier(userIdentifier);
     
-    sendAndReceiveData(request, response);
+    sendAndReceiveData(&request, &response);
 
     if(response.getKeyIdentifier() != lockIdentifier || response.getUserIdentifier() != userIdentifier) {
         throw HanException("Received incorrect response from server.");
@@ -44,7 +44,7 @@ bool Communicate::sendTestRequest() {
     request.setTestFrame(true);
 
     try {
-    	sendAndReceiveData(request, response);
+    	sendAndReceiveData(&request, &response);
     } catch(HanException& ex) {
     	return false;
     }
@@ -57,11 +57,12 @@ bool Communicate::sendTestRequest() {
     return true;
 }
 
-void Communicate::sendAndReceiveData(HanRequest request, HanResponse response) throw(HanException) {
+void Communicate::sendAndReceiveData(HanRequest *request, HanResponse *response) throw(HanException) {
     for (int i = 0; ; i++) {
     	try {
     	    sendData(request);
     	    receiveData(response);
+    	    return;
     	} catch(HanException& ex) {
     		if(i >= RETRIES) {
     			throw ex;
@@ -72,19 +73,19 @@ void Communicate::sendAndReceiveData(HanRequest request, HanResponse response) t
 	}
 }
 
-void Communicate::sendData(HanRequest request) throw (HanException) {
+void Communicate::sendData(HanRequest *request) throw (HanException) {
 	try {
-		client->send(request.getFrame(), request.getFrameSize());
+		client->send(request->getFrame(), request->getFrameSize());
 	} catch(NetworkException& ex) {
 		throw HanException(ex.getMessage());
     }
 }
 
-void Communicate::receiveData(HanResponse response) throw (HanException) {
+void Communicate::receiveData(HanResponse *response) throw (HanException) {
 	try {
-		char buffer[response.getFrameSize()];
-		client->receive(buffer, response.getFrameSize());
-		response.setFrame(buffer);
+		char buffer[response->getFrameSize()];
+		client->receive(buffer, response->getFrameSize());
+		response->setFrame(buffer);
 	} catch(NetworkException& ex) {
 		throw HanException(ex.getMessage());
 	}
