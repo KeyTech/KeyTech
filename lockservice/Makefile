@@ -1,128 +1,40 @@
-#
-#  There exist several targets which are by default empty and which can be 
-#  used for execution of your targets. These targets are usually executed 
-#  before and after some main targets. They are: 
-#
-#     .build-pre:              called before 'build' target
-#     .build-post:             called after 'build' target
-#     .clean-pre:              called before 'clean' target
-#     .clean-post:             called after 'clean' target
-#     .clobber-pre:            called before 'clobber' target
-#     .clobber-post:           called after 'clobber' target
-#     .all-pre:                called before 'all' target
-#     .all-post:               called after 'all' target
-#     .help-pre:               called before 'help' target
-#     .help-post:              called after 'help' target
-#
-#  Targets beginning with '.' are not intended to be called on their own.
-#
-#  Main targets can be executed directly, and they are:
-#  
-#     build                    build a specific configuration
-#     clean                    remove built files from a configuration
-#     clobber                  remove all built files
-#     all                      build all configurations
-#     help                     print help mesage
-#  
-#  Targets .build-impl, .clean-impl, .clobber-impl, .all-impl, and
-#  .help-impl are implemented in nbproject/makefile-impl.mk.
-#
-#  Available make variables:
-#
-#     CND_BASEDIR                base directory for relative paths
-#     CND_DISTDIR                default top distribution directory (build artifacts)
-#     CND_BUILDDIR               default top build directory (object files, ...)
-#     CONF                       name of current configuration
-#     CND_PLATFORM_${CONF}       platform name (current configuration)
-#     CND_ARTIFACT_DIR_${CONF}   directory of build artifact (current configuration)
-#     CND_ARTIFACT_NAME_${CONF}  name of build artifact (current configuration)
-#     CND_ARTIFACT_PATH_${CONF}  path to build artifact (current configuration)
-#     CND_PACKAGE_DIR_${CONF}    directory of package (current configuration)
-#     CND_PACKAGE_NAME_${CONF}   name of package (current configuration)
-#     CND_PACKAGE_PATH_${CONF}   path to package (current configuration)
-#
-# NOCDDL
+include variables.mk
 
+all: .prepare $(BUILD_DIR)/$(RELEASE_EXECUTABLE)
 
-# Environment 
-MKDIR=mkdir
-CP=cp
-CCADMIN=CCadmin
+.test: .prepare $(BUILD_DIR)/$(TEST_EXECUTABLE)
 
+.debug: .prepare $(BUILD_DIR)/$(DEBUG_EXECUTABLE)
 
-# build
-build: .build-post
+.clean:
+	-rm -R $(BUILD_DIR)
 
-.build-pre:
-# Add your pre 'build' code here...
+.prepare:
+	-mkdir $(BUILD_DIR)
+	-mkdir -p $(OBJ_DIR)
+	-mkdir -p $(TEST_OBJ_DIR)
+	-mkdir -p $(DEBUG_OBJ_DIR)
 
-.build-post: .build-impl
-# Add your post 'build' code here...
+$(BUILD_DIR)/$(RELEASE_EXECUTABLE): $(OBJ_FILES)
+	g++ $(OPTIONS) -o $(BUILD_DIR)/$(RELEASE_EXECUTABLE) $^
 
+$(BUILD_DIR)/$(TEST_EXECUTABLE): $(filter-out $(MAIN_DEBUG_OBJ),$(DEBUG_OBJ_FILES)) $(TEST_OBJ_FILES) $(BUILD_DIR)/gtest.o
+	g++ $(TEST_OPTIONS) -o $(BUILD_DIR)/$(TEST_EXECUTABLE) $^
 
-# clean
-clean: .clean-post
+$(BUILD_DIR)/$(DEBUG_EXECUTABLE): $(DEBUG_OBJ_FILES)
+	g++ $(DEBUG_OPTIONS) -o $(BUILD_DIR)/$(DEBUG_EXECUTABLE) $^
+	
+$(BUILD_DIR)/gmock.o: $(GMOCK_CPP_FILES)
+	g++ $(TEST_OPTIONS) $(TEST_INCLUDES) -c -o $@ $^
 
-.clean-pre:
-# Add your pre 'clean' code here...
+$(DEBUG_OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp 
+	g++ $(DEBUG_OPTIONS) $(INCLUDES) -c -o $@ $^
 
-.clean-post: .clean-impl
-# Add your post 'clean' code here...
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp 
+	g++ $(OPTIONS) $(INCLUDES) -c -o $@ $^
 
-
-# clobber
-clobber: .clobber-post
-
-.clobber-pre:
-# Add your pre 'clobber' code here...
-
-.clobber-post: .clobber-impl
-# Add your post 'clobber' code here...
-
-
-# all
-all: .all-post
-
-.all-pre:
-# Add your pre 'all' code here...
-
-.all-post: .all-impl
-# Add your post 'all' code here...
-
-
-# build tests
-build-tests: .build-tests-post
-
-.build-tests-pre:
-# Add your pre 'build-tests' code here...
-
-.build-tests-post: .build-tests-impl
-# Add your post 'build-tests' code here...
-
-
-# run tests
-test: .test-post
-
-.test-pre:
-# Add your pre 'test' code here...
-
-.test-post: .test-impl
-# Add your post 'test' code here...
-
-
-# help
-help: .help-post
-
-.help-pre:
-# Add your pre 'help' code here...
-
-.help-post: .help-impl
-# Add your post 'help' code here...
-
-
-
-# include project implementation makefile
-include nbproject/Makefile-impl.mk
-
-# include project make variables
-include nbproject/Makefile-variables.mk
+$(TEST_OBJ_DIR)/%.o: $(TEST_DIR)/%.cpp
+	g++ $(TEST_OPTIONS) $(TEST_INCLUDES) -c -o $@ $^
+	
+$(BUILD_DIR)/gtest.o: $(GTEST_CPP_FILES)
+	g++ $(TEST_OPTIONS) $(TEST_INCLUDES) -c -o $@ $^
