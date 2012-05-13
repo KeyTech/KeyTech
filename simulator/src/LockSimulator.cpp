@@ -7,7 +7,8 @@
 using namespace std;
 
 LockSimulator::LockSimulator(istream *is) :
-	stream(is) {}
+	stream(is) {
+}
 
 LockSimulator::LockSimulator()	{
 	stream = &cin;

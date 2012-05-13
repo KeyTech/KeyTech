@@ -1,14 +1,7 @@
-/*
- * LockSimulatorTest.cpp
- *
- *  Created on: May 8, 2012
- *      Author: hanna
- */
-
 #include "Mocks.h"
 
 TEST(LockSimulatorTest, testSetOutput)  {
-	ifstream stream("/home/hanna/KeyTech/simulator/test/open.txt");
+	ifstream stream("test/open.txt");
 
 	if (stream.is_open())	cout << "file opened" << endl;
 	else					cout << "file not opened";
@@ -16,13 +9,13 @@ TEST(LockSimulatorTest, testSetOutput)  {
 	LockSimulator ls(&stream);
 	ls.detectEntry();
 
-	EXPECT_EQ(ls.getStudentId(), (unsigned int)474296);
-	EXPECT_EQ(ls.getPin(), (unsigned int)1234);
+	EXPECT_EQ((unsigned int)474296, ls.getUserIdentifier());
+	EXPECT_EQ((unsigned int)1234, ls.getPincode());
 
 }
 
 TEST(LockSimulatorTest, testGetStudentId)  {
-	ifstream stream("/home/hanna/KeyTech/simulator/test/open.txt");
+	ifstream stream("test/open.txt");
 
 	if (stream.is_open())	cout << "file opened" << endl;
 	else					cout << "file not opened";
@@ -30,11 +23,11 @@ TEST(LockSimulatorTest, testGetStudentId)  {
 	LockSimulator ls(&stream);
 	ls.detectEntry();
 
-	EXPECT_EQ(ls.getStudentId(), (unsigned int)474296);
+	EXPECT_EQ((unsigned int)474296, ls.getUserIdentifier());
 }
 
 TEST(LockSimulatorTest, testGetPin)  {
-	ifstream stream("/home/hanna/KeyTech/simulator/test/open.txt");
+	ifstream stream("test/open.txt");
 
 	if (stream.is_open())	cout << "file opened" << endl;
 	else					cout << "file not opened";
@@ -42,20 +35,20 @@ TEST(LockSimulatorTest, testGetPin)  {
 	LockSimulator ls(&stream);
 	ls.detectEntry();
 
-	EXPECT_EQ(ls.getPin(), (unsigned int)1234);
+	EXPECT_EQ(ls.getPincode(), (unsigned int)1234);
 }
 
 TEST(LockSimulatorTest, testGetDoorState)  {
 	LockSimulator ls;
 
 	ls.setLockState(OPEN);
-	EXPECT_TRUE(ls.GetDoorState());
+	EXPECT_TRUE(ls.getLockState());
 }
 
 TEST(LockSimulatorTest, testSetDoorState)  {
 	LockSimulator ls;
 
 	ls.setLockState(CLOSED);
-	EXPECT_FALSE(ls.GetDoorState());
+	EXPECT_FALSE(ls.getLockState());
 }
 

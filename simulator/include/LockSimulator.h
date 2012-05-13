@@ -1,5 +1,5 @@
-#ifndef SLOTIO_H
-#define	SLOTIO_H
+#ifndef LOCKSIMULATOR_H
+#define	LOCKSIMULATOR_H
 
 #include "Defines.h"
 
@@ -7,9 +7,15 @@
 class LockSimulator {
 public:
 
-
+	/**
+	 * Constructor.
+	 * @param is is the stream to read from.
+	 */
 	LockSimulator(istream *is);
 
+	/**
+    * Constructor.
+	*/
 	LockSimulator();
 
     /**
@@ -53,5 +59,5 @@ private:
     istream *stream;
 };
 
-#endif	/* SLOTIO_H */
+#endif	/* LOCKSIMULATOR_H */
 

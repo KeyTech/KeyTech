@@ -58,12 +58,12 @@ bool Communicate::sendTestRequest() {
 }
 
 void Communicate::sendAndReceiveData(HanRequest request, HanResponse response) throw(HanException) {
-    for (int i = 0; ; ++i) {
+    for (int i = 0; ; i++) {
     	try {
     	    sendData(request);
     	    receiveData(response);
     	} catch(HanException& ex) {
-    		if(i == RETRIES) {
+    		if(i >= RETRIES) {
     			throw ex;
     		} else {
     			Logger::warning("Sending or receiving failed. [ " + ex.getMessage() + " ]");

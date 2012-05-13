@@ -35,5 +35,4 @@ void Logger::log(string level, string message) {
 	strftime(time, 20, "%d-%m-%Y %H:%M:%S", currentTime);
 
 	cerr << level << " [" << time << "]: " << message << endl;
-	cerr.flush();
 }

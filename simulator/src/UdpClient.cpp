@@ -31,6 +31,7 @@ void UdpClient::setTimeout(int seconds, int microseconds) {
 void UdpClient::receive(void *buffer, int bufferLength) throw(NetworkException) {
     unsigned int addressLength = sizeof(serverAddress);
     fd_set descriptors;
+	struct timeval timeout = this->timeout;
 
     FD_ZERO(&descriptors);
     FD_SET(socketDescriptor, &descriptors);
