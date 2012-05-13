@@ -6,6 +6,17 @@ all: .prepare $(BUILD_DIR)/$(RELEASE_EXECUTABLE)
 
 .debug: .prepare $(BUILD_DIR)/$(DEBUG_EXECUTABLE)
 
+.ci: .test .test-execution .documentation .coverage-report
+
+.test-execution:
+	$(BUILD_DIR)/$(TEST_EXECUTABLE) --gtest_output=xml:build/test-results.xml
+
+.documentation:
+	doxygen doxygen.config
+
+.coverage-report:
+	$(GCOVR) -f '.*/src' -x -o build/coverage.xml -r simulator/src
+
 .clean:
 	-rm -R $(BUILD_DIR)
 
@@ -19,7 +30,7 @@ $(BUILD_DIR)/$(RELEASE_EXECUTABLE): $(OBJ_FILES)
 	g++ $(OPTIONS) -o $(BUILD_DIR)/$(RELEASE_EXECUTABLE) $^
 
 $(BUILD_DIR)/$(TEST_EXECUTABLE): $(filter-out $(MAIN_DEBUG_OBJ),$(DEBUG_OBJ_FILES)) $(TEST_OBJ_FILES) $(BUILD_DIR)/gtest.o
-	g++ $(TEST_OPTIONS) -o $(BUILD_DIR)/$(TEST_EXECUTABLE) $^
+	g++ $(TEST_OPTIONS) $(DEBUG_OPTIONS) -o $(BUILD_DIR)/$(TEST_EXECUTABLE) $^
 
 $(BUILD_DIR)/$(DEBUG_EXECUTABLE): $(DEBUG_OBJ_FILES)
 	g++ $(DEBUG_OPTIONS) -o $(BUILD_DIR)/$(DEBUG_EXECUTABLE) $^

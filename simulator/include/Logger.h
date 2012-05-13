@@ -6,7 +6,7 @@
 using namespace std;
 
 /**
- * Logger utility class for logging messages. All messages will standard be logged to the standard error stream.
+ * @brief Logger utility class for logging messages. All messages will standard be logged to the standard error stream.
  */
 class Logger {
 public:

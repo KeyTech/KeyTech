@@ -60,7 +60,7 @@ TEST(HanRequestTest, testSetFrame) {
     instance.setFrame(frame);
 
     EXPECT_EQ(1234, instance.getKeyIdentifier());
-    EXPECT_EQ(466271, instance.getUserIdentifier());
+    EXPECT_EQ((uint32_t) 466271, instance.getUserIdentifier());
     EXPECT_EQ(1234, instance.getCode());
     ASSERT_TRUE(instance.isLocked());
     ASSERT_FALSE(instance.isTestFrame());

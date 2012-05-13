@@ -29,5 +29,8 @@ MAIN_DEBUG_OBJ := $(DEBUG_OBJ_DIR)/main.o
 INCLUDES := -I include
 TEST_INCLUDES := $(INCLUDES) -I contrib
 OPTIONS := -Wall
-DEBUG_OPTIONS := $(OPTIONS) -ggdb
-TEST_OPTIONS := $(DEBUG_OPTIONS) -pthread
+DEBUG_OPTIONS := $(OPTIONS) -ggdb -fprofile-arcs -ftest-coverage
+TEST_OPTIONS := $(OPTIONS) -ggdb -pthread
+
+# Programs
+GCOVR := ../programs/gcovr

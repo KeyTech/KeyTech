@@ -65,7 +65,7 @@ bool LockSimulator::setOutput(ResponseAnswer flags) {
 		case NO_ACCESS:
 			cout << "Not authorized for this lock at this time." << endl;
 			return true;
-		case USER_BLOCKED:
+		default: //USER_BLOCKED
 			cout << "User is blocked for some reasen by server. (To many authentication attempts?)" << endl;
 			return true;
 	}
