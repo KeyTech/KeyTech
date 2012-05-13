@@ -10,8 +10,8 @@ CREATE DATABASE lockservice;
 USE lockservice;
 
 CREATE TABLE user (
-	userIdentifier INT NOT NULL,
-	pincode INT NOT NULL,
+	userIdentifier INT UNSIGNED NOT NULL,
+	pincode SMALLINT UNSIGNED NOT NULL,
 	firstname VARCHAR(40) NOT NULL,
 	lastname VARCHAR(40) NOT NULL,
 	CONSTRAINT pk_user PRIMARY KEY (userIdentifier)
@@ -23,13 +23,13 @@ CREATE TABLE accessGroup (
 );
 
 CREATE TABLE networkLock(
-	lockIdentifier INT NOT NULL,
+	lockIdentifier SMALLINT UNSIGNED NOT NULL,
 	CONSTRAINT pk_networkLock PRIMARY KEY(lockIdentifier)
 );
 
 CREATE TABLE unlimitedAccess(
 	name VARCHAR(30) NOT NULL,
-	CONSTRAINT unlimitedAccess PRIMARY KEY(name)
+	CONSTRAINT pk_unlimitedAccess PRIMARY KEY(name)
 );
 
 CREATE TABLE reservationTime(
@@ -42,7 +42,7 @@ CREATE TABLE reservationTime(
 
 CREATE TABLE reservation(
 	groupName VARCHAR(30) NOT NULL,
-	lockIdentifier INT NOT NULL,
+	lockIdentifier SMALLINT UNSIGNED NOT NULL,
 	creationDate DATETIME NOT NULL,
 	repeatInterval ENUM('DAY', 'WEEK', 'MONTH') NOT NULL,
 	startDate DATE NOT NULL,
@@ -61,8 +61,8 @@ CREATE TABLE reservation(
 );
 
 CREATE TABLE userLog(
-	userIdentifier INT NOT NULL,
-	lockIdentifier INT NOT NULL,
+	userIdentifier INT UNSIGNED NOT NULL,
+	lockIdentifier SMALLINT UNSIGNED NOT NULL,
 	logDate DATETIME NOT NULL,
 	result ENUM('PERMISSION_GRANTED' ,'INCORRECT_ID', 'NO_ACCESS', 'USER_BLOCKED') NOT NULL,
 	CONSTRAINT fk_userLog_user 
@@ -76,14 +76,14 @@ CREATE TABLE userLog(
 -- Log tables
 
 CREATE TABLE testFrameLog(
-	lockIdentifier INT NOT NULL,
+	lockIdentifier SMALLINT UNSIGNED NOT NULL,
 	receivedDate DATETIME NOT NULL
 );
 
 -- Link tables
 
 CREATE TABLE userAccessGroup(
-	userIdentifier INT NOT NULL,
+	userIdentifier INT UNSIGNED NOT NULL,
 	groupName VARCHAR(30) NOT NULL,
 	CONSTRAINT pk_userAccessGroup PRIMARY KEY(userIdentifier, groupName),
 	CONSTRAINT fk_userAccessGroup_user 
@@ -107,7 +107,7 @@ CREATE TABLE accessGroupUnlimitedAccess(
 );
 
 CREATE TABLE networkLockUnlimitedAccess(
-	lockIdentifier INT NOT NULL,
+	lockIdentifier SMALLINT UNSIGNED NOT NULL,
 	unlimitedAccessName VARCHAR(30) NOT NULL,
 	CONSTRAINT pk_networkLockUnlimitedAccess PRIMARY KEY(lockIdentifier, unlimitedAccessName),
 	CONSTRAINT fk_networkLockUnlimitedAccess_networkLock 
