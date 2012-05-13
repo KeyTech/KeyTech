@@ -6,6 +6,9 @@ all: .prepare $(BUILD_DIR)/$(RELEASE_EXECUTABLE)
 
 .debug: .prepare $(BUILD_DIR)/$(DEBUG_EXECUTABLE)
 
+.clean:
+	-rm -R $(BUILD_DIR)
+
 .prepare:
 	-mkdir $(BUILD_DIR)
 	-mkdir -p $(OBJ_DIR)

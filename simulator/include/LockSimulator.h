@@ -26,44 +26,30 @@ public:
     bool setOutput(ResponseAnswer flags);
     
     /**
-     * brief Sets the door state.
-     * @param state The state to set the door to. Either OPEN or CLOSED.
+     * Sets the lock state.
+     * @param state The state to set the lock to. Either OPEN or CLOSED.
      */
-    void SetDoorState(bool state);
+    void setLockState(bool state);
     
     /**
-     * Returns the state of the door.
-     * @return Returns the state of the door. Either OPEN or CLOSED.
+     * @return the state of the lock. Either OPEN or CLOSED.
      */
-    bool GetDoorState();
+    bool getLockState();
     
     /**
-     * Getter for the student ID.
-     * Allows another class to get the ID input by the user.
-     * @return returns the student ID in a 32 bit unsigned int.
+     * @return the user identifier as a 32 bit unsigned integer.
      */
-    uint32_t getStudentId();
+    uint32_t getUserIdentifier();
     
     /**
-     * Getter for the pin
-     * Allows another class to get the pin input by the user.
-     * @return returns the pin in a 16 bit unsigned int.
+     * @return the pin code in a 16 bit unsigned integer.
      */
-    uint16_t getPin();
-    
-    
-/**
- * A macro to flush the input from the command line.
- * Macro om stdin te flushen.
- http://www.daniweb.com/software-development/c/code/217396
- */
-char Junk[16]; // buffer for discarding excessive user input, used by "FLUSH_STDIN" macro
-#define FLUSH_STDIN(x) {if(x[strlen(x)-1]!='\n'){do fgets(Junk,16,stdin);while(Junk[strlen(Junk)-1]!='\n');}else x[strlen(x)-1]='\0';}
-    
+    uint16_t getPincode();
+
 private:
-    uint32_t studentID;
-    uint16_t pin;
-    bool door_state;
+    uint32_t userIdentifier;
+    uint16_t pincode;
+    bool lockState;
     istream *stream;
 };
 

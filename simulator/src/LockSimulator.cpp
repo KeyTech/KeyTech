@@ -1,13 +1,8 @@
-/* 
- * File:   SlotIO.cpp
- * Author: nathanael
- * 
- * Created on April 23, 2012, 1:15 PM
- */
-
-#include "LockSimulator.h"
 #include <limits>
 #include <string>
+
+#include "LockSimulator.h"
+#include "Logger.h"
 
 using namespace std;
 
@@ -19,27 +14,34 @@ LockSimulator::LockSimulator()	{
 }
 
 bool LockSimulator::detectEntry() {
-	studentID = 0;
-	pin = 0;
+	userIdentifier = 0;
+	pincode = 0;
 
-	string input;
+	string userIdentifierInput, pincodeInput;
 
-	cout << "Please enter your 6 digit student ID." << endl;
-	getline(*stream, input);
-	studentID = atoi(input.c_str());
+	try {
+		cout << "Please enter your 6 digit student ID." << endl;
+		getline(*stream, userIdentifierInput);
+		userIdentifier = atoi(userIdentifierInput.c_str());
 
-	cout << "Please enter your 4 digit pin code." << endl;
-	getline(*stream, input);
-	pin = atoi(input.c_str());
+		if (userIdentifierInput.length() != 6 || userIdentifier < 0) {
+			throw "User identifier should be 6 digits long.";
+		}
 
-	//test to see if I get it right:
-	cout << "studentID: " << studentID << endl << "Pin: " << pin << endl;
+		cout << "Please enter your 4 digit pin code." << endl;
+		getline(*stream, pincodeInput);
 
-	if (studentID > 0 && pin > 0) {
-		cout << "Entry succesful" << endl;
+		pincode = atoi(pincodeInput.c_str());
+
+		if (pincodeInput.length() != 4) {
+			throw "Pin code should be 4 digits long.";
+		}
+
+		Logger::info("Input read: userIdentifier: " + userIdentifierInput + ", pin code: " + pincodeInput);
 		return true;
-	} else {
-		cout << "Invalid entry. Please try again" << endl;
+	} catch (const char *error) {
+		cout << error << endl;
+		Logger::warning("Reading input failed. Incorrect input.");
 		return false;
 	}
 }
@@ -47,42 +49,39 @@ bool LockSimulator::detectEntry() {
 bool LockSimulator::setOutput(ResponseAnswer flags) {
 	switch (flags) {
 		case PERMISSION_GRANTED:
-			cout << "Permission to change door state granted." << endl;
-			if (GetDoorState()) { //OPEN == true.
-				SetDoorState(CLOSED);
+			cout << "Permission to change lock state granted." << endl;
+			if (getLockState() == OPEN) {
+				setLockState(CLOSED);
 				cout << "Door is now locked." << endl;
 			} else {
-				SetDoorState(OPEN);
+				setLockState(OPEN);
 				cout << "Door is now unlocked." << endl;
 			}
 			return true;
 		case INCORRECT_ID:
-			cout << "ID incorrect." << endl;
+			cout << "Could not identificate user." << endl;
 			return true;
 		case NO_ACCESS:
-			cout << "Unauthorized access at this time." << endl;
+			cout << "Not authorized for this lock at this time." << endl;
 			return true;
 		case USER_BLOCKED:
-			cout << "Too many attempts done. You have been banned for x time." << endl;
+			cout << "User is blocked for some reasen by server. (To many authentication attempts?)" << endl;
 			return true;
-		default:
-			cout << "No known response answer." << endl;
-			return false;
 	}
 }
 
-void LockSimulator::SetDoorState(bool state) {
-	door_state = state;
+void LockSimulator::setLockState(bool state) {
+	lockState = state;
 }
 
-bool LockSimulator::GetDoorState() {
-	return door_state;
+bool LockSimulator::getLockState() {
+	return lockState;
 }
 
-uint32_t LockSimulator::getStudentId() {
-	return studentID;
+uint32_t LockSimulator::getUserIdentifier() {
+	return userIdentifier;
 }
 
-uint16_t LockSimulator::getPin() {
-	return pin;
+uint16_t LockSimulator::getPincode() {
+	return pincode;
 }

@@ -72,7 +72,7 @@ private:
         FLAGS = 6,
     };
     
-    enum flags : char {
+    enum flags {
         F_PERMISSION_GRANTED = 0b00000001,
         F_INCORRECT_ID = 0b00000010,
         F_NO_ACCESS = 0b00000100,

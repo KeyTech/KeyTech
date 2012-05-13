@@ -6,6 +6,10 @@
 #include "HanResponse.h"
 #include "HanException.h"
 #include "Defines.h"
+#include "UdpClient.h"
+
+#define RETRIES 3
+#define TIMEOUT 3
 
 class Communicate {
 public:
@@ -15,6 +19,12 @@ public:
     bool sendTestRequest();
     
 private:
+    void sendData(HanRequest request) throw(HanException);
+    void receiveData(HanResponse response) throw(HanException);
+    void sendAndReceiveData(HanRequest request, HanResponse response) throw (HanException);
+
+    UdpClient *client;
+
     sockaddr_in serverAddress;
     uint16_t lockIdentifier;
     int socketDescriptor;

@@ -48,14 +48,14 @@ TEST(LockSimulatorTest, testGetPin)  {
 TEST(LockSimulatorTest, testGetDoorState)  {
 	LockSimulator ls;
 
-	ls.SetDoorState(OPEN);
+	ls.setLockState(OPEN);
 	EXPECT_TRUE(ls.GetDoorState());
 }
 
 TEST(LockSimulatorTest, testSetDoorState)  {
 	LockSimulator ls;
 
-	ls.SetDoorState(CLOSED);
+	ls.setLockState(CLOSED);
 	EXPECT_FALSE(ls.GetDoorState());
 }
 

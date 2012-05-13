@@ -18,8 +18,14 @@ int HanFrame::getFrameSize() {
     return sizeof (frame);
 }
 
-void HanFrame::setFrame(void *frame) {
+void HanFrame::setFrame(void *frame) throw(HanException) {
 	memcpy(this->frame, frame, getFrameSize());
+
+    uint16_t *checksum = (uint16_t *) &this->frame[CHECKSUM];
+
+    if(*checksum != calculateChecksum()) {
+    	throw HanException("Checksum of frame was incorrect.");
+    }
 }
 
 uint16_t HanFrame::calculateChecksum() {

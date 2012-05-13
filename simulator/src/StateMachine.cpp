@@ -1,78 +1,72 @@
-/* 
- * File:   StateMachine.cpp
- * Author: nathanael
- * 
- * Created on April 25, 2012, 10:07 AM
- */
+#include <signal.h>
+#include <unistd.h>
 
+#include "Logger.h"
 #include "StateMachine.h"
 
 StateMachine::StateMachine(int argc, char** argv)
-: next_state(INIT)
+: state(INIT)
 {
-	cout << "FSM state : " << next_state;
-    cout << "State Machine started." << endl;
-    
     try {
-        communicate = new Communicate(argv[1], (uint16_t) atoi(argv[2]), (uint16_t) atoi(argv[3]) );
-    } catch (HanException ex) {
-        ex.getMessage();
+        communicate = new Communicate(argv[1], (uint16_t) atoi(argv[2]), (uint16_t) atoi(argv[3]));
+    } catch (HanException& ex) {
+        cout << ex.getMessage();
         exit(EXIT_FAILURE); //Using exit() for now, till a better solution has been thought of.
     }
+
     lockSimulator = new LockSimulator();
+
+    cout << "Simulator is starting..." << endl;
 }
 
-bool StateMachine::init() {
-    //SlotIO:
-	lockSimulator->SetDoorState(OPEN);
+int StateMachine::init() {
     if(communicate->sendTestRequest()){
-        return true; //Test frame succesful, start normal operations.
+        return IDLE; //Test frame successful, start normal operations.
     } else {
-        return false; //Test frame failed, redo init.
+    	cout << "Sending test frame failed." << endl;
+        return ERROR; //Test frame failed, go to error.
     }
+
+    cout << "Simulator is initialized." << endl;
+}
+
+int StateMachine::error() {
+	cout << "Error state reached. In 10 seconds, initialization will be redone, press Ctrl+C to exit." << endl;
+	sleep(10);
+	return INIT;
 }
 
 void StateMachine::runStateMachine() {
     ResponseAnswer answer;
+
     while(true){
-        //cout << "Next_state: " << next_state << endl;
-        switch(next_state){
+        switch(state){
             case IDLE:
-                cout << "Test state IDLE" << endl;
                 if(lockSimulator->detectEntry()){
-                    next_state = COMMUNICATE;
+                    state = COMMUNICATE;
                 } else {
-                    next_state = IDLE;
+                    state = IDLE;
                 }
                 break;
             case COMMUNICATE:
                 try {
-                    answer = communicate->sendRequest(lockSimulator->getStudentId(), lockSimulator->getPin());
-                    next_state = PROCESS_OUTPUT;
-                } catch (HanException ex) {
-                    next_state = ERROR;
-                    ex.getMessage();
+                    answer = communicate->sendRequest(lockSimulator->getUserIdentifier(), lockSimulator->getPincode());
+                    state = PROCESS_OUTPUT;
+                } catch (HanException& ex) {
+                    state = ERROR;
+                    cout << "Communication with server failed." << endl;
+                    Logger::warning("Communication with server failed: " + ex.getMessage());
                 }
                 break;
             case PROCESS_OUTPUT:
-                cout << "Test state PROCESS_OUTPUT" << endl;
-                if(lockSimulator->setOutput(answer) ) {
-                    next_state = IDLE;
-                } else {
-                    next_state = SEND;
-                }
-                next_state = IDLE;
+                lockSimulator->setOutput(answer);
+                state = IDLE;
                 break;
             case ERROR:
-                cout << "Error state" << endl;
-                next_state = INIT;
+                state = error();
                 break;
             case INIT:
-                if(init()){
-                    next_state = IDLE;
-                } else {
-                    next_state = INIT;
-                }
+                state = init();
                 break;
             default:
                 cerr << "No valid state selected" << endl << "Exiting program" << endl;
@@ -81,3 +75,15 @@ void StateMachine::runStateMachine() {
     }
 }
 
+bool StateMachine::interruptHandler() {
+	switch(state) {
+		case IDLE:
+		case ERROR:
+			cout << "Simulator will exit." << endl;
+			exit(EXIT_SUCCESS);
+			return true;
+		default:
+			cout << "Interruption signal received but ignored." << endl;
+			return false;
+	}
+}

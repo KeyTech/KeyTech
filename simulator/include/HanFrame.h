@@ -2,6 +2,7 @@
 #define HANFRAME_H_
 
 #include <stdint.h>
+#include "HanException.h"
 
 class HanFrame {
 public:
@@ -23,7 +24,7 @@ public:
      * @param frame Pointer to the frame. Should have a size equal to the framesize.
      * @see getFrameSize()
      */
-    void setFrame(void *frame);
+    void setFrame(void *frame) throw(HanException);
 
 protected:
     enum frameDefinition {

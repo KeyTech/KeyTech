@@ -1,10 +1,3 @@
-/* 
- * File:   StateMachine.h
- * Author: nathanael
- *
- * Created on April 25, 2012, 10:07 AM
- */
-
 #ifndef STATEMACHINE_H
 #define	STATEMACHINE_H
 
@@ -13,44 +6,40 @@
 #include "Communicate.h"
 #include "HanException.h"
 
-/*! \brief States:
- * 
- */
 #define INIT 0
 #define IDLE 1
-#define SEND 2
-#define RECEIVE 3
-#define PROCESS_OUTPUT 4
-#define ERROR 5
-#define COMMUNICATE 6
+#define RECEIVE 2
+#define PROCESS_OUTPUT 3
+#define ERROR 4
+#define COMMUNICATE 5
 
 class StateMachine {
 public:
     
     /**
-     * Constructor
      * @param argc the number of command line arguments entered.
      * @param argv the arguments themselves.
      */
     StateMachine(int argc, char** argv);
 
-    /** Init
-    * 
-    * \return True when init successful, false if it failed.
-    */
-    bool init();
-    
-    /** State Machine
+    /**
      * Starts the state machine and determines the next state to be executed.
      */
     void runStateMachine();
     
+    /**
+     * Should be called when the program tries to interrupt.
+     * @return true if the state machine will interrupt, false otherwise.
+     */
+    bool interruptHandler();
 private:
     Communicate *communicate;
     LockSimulator *lockSimulator;
     
-    int next_state;
+    int state;
+
+    int init();
+    int error();
 };
 
 #endif	/* STATEMACHINE_H */
-

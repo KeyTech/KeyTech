@@ -47,6 +47,12 @@ void HanResponse::setAnswer(ResponseAnswer answer) {
 ResponseAnswer HanResponse::getAnswer() {
 	if (frame[FLAGS] & F_PERMISSION_GRANTED) {
 		return PERMISSION_GRANTED;
+	} else if(frame[FLAGS] & F_INCORRECT_ID) {
+		return INCORRECT_ID;
+	} else if(frame[FLAGS] & F_NO_ACCESS) {
+		return NO_ACCESS;
+	} else {
+		return USER_BLOCKED;
 	}
 }
 
