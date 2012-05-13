@@ -12,7 +12,7 @@ all: .prepare $(BUILD_DIR)/$(RELEASE_EXECUTABLE)
 	$(BUILD_DIR)/$(TEST_EXECUTABLE) --gtest_output=xml:build/test-results.xml
 
 .documentation:
-	doxygen doxygen.config
+	cd ..; doxygen simulator/doxygen.config
 
 .coverage-report:
 	$(GCOVR) -f '.*/src' -x -o build/coverage.xml -r simulator/src
