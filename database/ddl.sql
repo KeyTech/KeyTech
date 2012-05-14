@@ -22,9 +22,11 @@ CREATE TABLE accessGroup (
 	CONSTRAINT pk_accessGroup PRIMARY KEY (groupName)
 );
 
-CREATE TABLE networkLock(
+CREATE TABLE room(
 	lockIdentifier SMALLINT UNSIGNED NOT NULL,
-	CONSTRAINT pk_networkLock PRIMARY KEY(lockIdentifier)
+	roomName VARCHAR(30) NOT NULL,
+	CONSTRAINT pk_room PRIMARY KEY(lockIdentifier),
+	CONSTRAINT ak_room UNIQUE(roomName)
 );
 
 CREATE TABLE unlimitedAccess(
@@ -52,13 +54,15 @@ CREATE TABLE reservation(
 	CONSTRAINT fk_reservation_accessGroup 
 		FOREIGN KEY (groupName)
 		REFERENCES accessGroup(groupName),
-	CONSTRAINT fk_reservation_networkLock 
+	CONSTRAINT fk_reservation_room 
 		FOREIGN KEY (lockIdentifier)
-		REFERENCES networkLock(lockIdentifier),
+		REFERENCES room(lockIdentifier),
 	CONSTRAINT fk_reservation_reservationTime
 		FOREIGN KEY (reservationTimeName)
 		REFERENCES reservationTime(name)
 );
+
+-- Log tables
 
 CREATE TABLE userLog(
 	userIdentifier INT UNSIGNED NOT NULL,
@@ -68,12 +72,10 @@ CREATE TABLE userLog(
 	CONSTRAINT fk_userLog_user 
 		FOREIGN KEY (userIdentifier)
 		REFERENCES user(userIdentifier),
-	CONSTRAINT fk_userLog_networkLock 
+	CONSTRAINT fk_userLog_room 
 		FOREIGN KEY (lockIdentifier)
-		REFERENCES networkLock(lockIdentifier)
+		REFERENCES room(lockIdentifier)
 );
-
--- Log tables
 
 CREATE TABLE testFrameLog(
 	lockIdentifier SMALLINT UNSIGNED NOT NULL,
@@ -106,14 +108,14 @@ CREATE TABLE accessGroupUnlimitedAccess(
 		REFERENCES unlimitedAccess(name)
 );
 
-CREATE TABLE networkLockUnlimitedAccess(
+CREATE TABLE roomUnlimitedAccess(
 	lockIdentifier SMALLINT UNSIGNED NOT NULL,
 	unlimitedAccessName VARCHAR(30) NOT NULL,
-	CONSTRAINT pk_networkLockUnlimitedAccess PRIMARY KEY(lockIdentifier, unlimitedAccessName),
-	CONSTRAINT fk_networkLockUnlimitedAccess_networkLock 
+	CONSTRAINT pk_roomUnlimitedAccess PRIMARY KEY(lockIdentifier, unlimitedAccessName),
+	CONSTRAINT fk_roomUnlimitedAccess_room 
 		FOREIGN KEY (lockIdentifier) 
-		REFERENCES networkLock(lockIdentifier),
-	CONSTRAINT fk_networkLockUnlimitedAccess_unlimitedAccess 
+		REFERENCES room(lockIdentifier),
+	CONSTRAINT fk_roomUnlimitedAccess_unlimitedAccess 
 		FOREIGN KEY (unlimitedAccessName) 
 		REFERENCES unlimitedAccess(name)
 );
