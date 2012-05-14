@@ -9,13 +9,16 @@ all: .prepare $(BUILD_DIR)/$(RELEASE_EXECUTABLE)
 .ci: .test .test-execution .documentation .coverage-report
 
 .test-execution:
-	$(BUILD_DIR)/$(TEST_EXECUTABLE) --gtest_output=xml:build/test-results.xml
+	$(BUILD_DIR)/$(TEST_EXECUTABLE) --gtest_output=xml:$(BUILD_DIR)/test-results.xml
 
 .documentation:
-	cd ..; doxygen simulator/doxygen.config
+	doxygen $(WORKING_DIR)/doxygen.config
 
 .coverage-report:
-	$(GCOVR) -f '.*/src' -x -o build/coverage.xml -r simulator/src
+	$(GCOVR) -f '$(WORKING_DIR)/$(SRC_DIR)' -x -o $(BUILD_DIR)/coverage.xml -r $(WORKING_DIR)/$(SRC_DIR)
+
+.checkstyle:
+	cppcheck --xml --includes-file=include -v --enable=all src/ 2> $(BUILD_DIR)/checkstyle.xml
 
 .clean:
 	-rm -R $(BUILD_DIR)

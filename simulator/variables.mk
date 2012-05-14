@@ -1,4 +1,6 @@
-PROGRAM_NAME = simulator
+PROGRAM_NAME := simulator
+WORKING_DIR = `pwd`
+GIT_REPOSITORY := $(WORKING_DIR)/..
 
 # Executables
 TEST_EXECUTABLE = test-execution
