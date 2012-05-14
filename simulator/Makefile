@@ -18,7 +18,7 @@ all: .prepare $(BUILD_DIR)/$(RELEASE_EXECUTABLE)
 	$(GCOVR) -f '$(WORKING_DIR)/$(SRC_DIR)' -x -o $(BUILD_DIR)/coverage.xml -r $(WORKING_DIR)/$(SRC_DIR)
 
 .checkstyle:
-	cppcheck --xml --includes-file=include -v --enable=all src/ 2> $(BUILD_DIR)/checkstyle.xml
+	cd $(GIT_REPOSITORY); cppcheck --xml --includes-file=include -v --enable=all $(WORKING_DIR)/src/ 2> $(WORKING_DIR)/$(BUILD_DIR)/checkstyle.xml
 
 .clean:
 	-rm -R $(BUILD_DIR)

@@ -1,5 +1,5 @@
 PROGRAM_NAME := simulator
-WORKING_DIR = `pwd`
+WORKING_DIR := $(shell pwd)
 GIT_REPOSITORY := $(WORKING_DIR)/..
 
 # Executables
