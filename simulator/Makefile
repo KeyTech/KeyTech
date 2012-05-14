@@ -15,10 +15,10 @@ all: .prepare $(BUILD_DIR)/$(RELEASE_EXECUTABLE)
 	doxygen $(WORKING_DIR)/doxygen.config
 
 .coverage-report:
-	$(GCOVR) -f '$(WORKING_DIR)/$(SRC_DIR)' -x -o $(BUILD_DIR)/coverage.xml -r $(WORKING_DIR)/$(SRC_DIR)
+	$(GCOVR) -f '$(WORKING_DIR)/$(SRC_DIR)' -x -o $(BUILD_DIR)/coverage.xml -r simulator/$(SRC_DIR)
 
 .checkstyle:
-	cd $(GIT_REPOSITORY); cppcheck --xml --includes-file=include -v --enable=all $(WORKING_DIR)/src/ 2> $(WORKING_DIR)/$(BUILD_DIR)/checkstyle.xml
+	cppcheck --xml --includes-file=include -v --enable=all src/ 2> $(BUILD_DIR)/checkstyle.xml
 
 .clean:
 	-rm -R $(BUILD_DIR)
