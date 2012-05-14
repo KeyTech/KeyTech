@@ -36,8 +36,8 @@ CREATE TABLE unlimitedAccess(
 
 CREATE TABLE reservationTime(
 	name VARCHAR(30) NOT NULL,
-	startTime INT NOT NULL,
-	endTime INT NOT NULL,
+	startTime TIME NOT NULL,
+	endTime TIME NOT NULL,
 	CONSTRAINT pk_reservationTime PRIMARY KEY(name),
 	CONSTRAINT ak_reservationTime UNIQUE(startTime, endTime)
 );
