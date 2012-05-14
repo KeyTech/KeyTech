@@ -6,7 +6,7 @@ all: .prepare $(BUILD_DIR)/$(RELEASE_EXECUTABLE)
 
 .debug: .prepare $(BUILD_DIR)/$(DEBUG_EXECUTABLE)
 
-.ci: .test .test-execution .documentation .coverage-report
+.ci: .test .test-execution .documentation .coverage-report .checkstyle
 
 .test-execution:
 	$(BUILD_DIR)/$(TEST_EXECUTABLE) --gtest_output=xml:$(BUILD_DIR)/test-results.xml
