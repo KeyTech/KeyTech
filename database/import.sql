@@ -1,16 +1,16 @@
 -- Insert script to fill the lock service database.
 use lockservice;
-DELETE FROM testFrameLog
-DELETE FROM userLog
-DELETE FROM roomUnlimitedAccess
-DELETE FROM accessGroupUnlimitedAccess
-DELETE FROM userAccessGroup
-DELETE FROM reservation
-DELETE FROM reservationTime
-DELETE FROM unlimitedAccess
-DELETE FROM room
-DELETE FROM accessGroup
-DELETE FROM user
+DELETE FROM testFrameLog;
+DELETE FROM userLog;
+DELETE FROM roomUnlimitedAccess;
+DELETE FROM accessGroupUnlimitedAccess;
+DELETE FROM userAccessGroup;
+DELETE FROM reservation;
+DELETE FROM reservationTime;
+DELETE FROM unlimitedAccess;
+DELETE FROM room;
+DELETE FROM accessGroup;
+DELETE FROM user;
 
 -- Default tables
 INSERT INTO user (userIdentifier, pincode, firstname, lastname)
