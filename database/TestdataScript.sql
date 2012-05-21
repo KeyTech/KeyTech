@@ -2,6 +2,9 @@
 use lockservice;
 TRUNCATE TABLE testFrameLog
 TRUNCATE TABLE userLog
+TRUNCATE TABLE roomUnlimitedAccess
+TRUNCATE TABLE accessGroupUnlimitedAccess
+TRUNCATE TABLE userAccessGroup
 TRUNCATE TABLE reservation
 TRUNCATE TABLE reservationTime
 TRUNCATE TABLE unlimitedAccess
@@ -36,7 +39,7 @@ VALUES ('morning', '08:45:00', '11:59:59'),
 ('whole_day', '08:45:00', '17:30:00');
 
 INSERT INTO reservation (groupname, lockIdentifier, creationDate, repeatInterval, startDate, endDate, reservationTimeName)
-VALUES ('KeyTech', 1, SYSDATE(), 'DAY', DATE(SYSDATE()), DATE(SYSDATE()+2592000), 'whole_day'), --enddate is current date + 30 days.
+VALUES ('KeyTech', 1, SYSDATE(), 'DAY', DATE(SYSDATE()), DATE(SYSDATE()+2592000), 'whole_day'), -- enddate is current date + 30 days.
 ('Teachers', 2, SYSDATE(), 'MONTH', DATE(SYSDATE()), DATE(SYSDATE()+2592000), 'morning'),
 ('KeyTech', 3, SYSDATE(), 'WEEK', DATE(SYSDATE()), DATE(SYSDATE()+2592000), 'afternoon');
 
@@ -51,8 +54,8 @@ VALUES ('Janitors', 'Janitors');
 
 INSERT INTO roomUnlimitedAccess (lockIdentifier, unlimitedAccessName)
 VALUES (1, 'Janitors'),
-VALUES (2, 'Janitors'),
-VALUES (3, 'Janitors');
+(2, 'Janitors'),
+(3, 'Janitors');
 
 -- Log tables
 INSERT INTO userLog (userIdentifier, lockIdentifier, logDate)
