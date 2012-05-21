@@ -1,5 +1,13 @@
 -- Insert script to fill the lock service database.
 use lockservice;
+TRUNCATE TABLE testFrameLog
+TRUNCATE TABLE userLog
+TRUNCATE TABLE reservation
+TRUNCATE TABLE reservationTime
+TRUNCATE TABLE unlimitedAccess
+TRUNCATE TABLE room
+TRUNCATE TABLE accessGroup
+TRUNCATE TABLE user
 
 -- Default tables
 INSERT INTO user (userIdentifier, pincode, firstname, lastname)
