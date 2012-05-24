@@ -1,19 +1,29 @@
 /* 
  * File:   main.cpp
- * Author: tristan
+ * Author: torisuta
  *
- * Created on May 3, 2012, 10:04 PM
+ * Created on May 16, 2012, 12:34 PM
  */
 
-#include "LockService.h"
+#include <iostream>
+#include "lockservice.h"
+
+LockService *lockservice;
 
 /*
  * 
  */
-int main(int argc, char* argv[]) {
+int main(int argc, char** argv) {
     
-  LockService ServiceRunner;
+    if (argc < 2) {
+        cerr << "\nMissing the arguments <Interface name> <Port number>\n\n" << endl;
+        return EXIT_FAILURE;
+    }
     
-  return 0;
+    cout << "Booting the service. \n" << endl;
+    
+    lockservice = new LockService(argc, argv);
+
+    return 0;
 }
 

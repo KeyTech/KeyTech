@@ -28,6 +28,6 @@ MAIN_DEBUG_OBJ := $(DEBUG_OBJ_DIR)/main.o
 # Includes:
 INCLUDES := -I include -I contrib/mysql/include
 TEST_INCLUDES := $(INCLUDES) -I contrib
-OPTIONS := -Wall -Lcontrib/mysql/lib32 -Lcontrib/mysql/lib64 -lmysql
+OPTIONS := -Wall -Lcontrib/mysql/lib32 -Lcontrib/mysql/lib64 -lmysqlclient -lpthread -lz -lm -lrt -ldl -DBIG_JOINS=1  -fno-strict-aliasing  -g 
 DEBUG_OPTIONS := $(OPTIONS) -ggdb
 TEST_OPTIONS := $(DEBUG_OPTIONS) -pthread

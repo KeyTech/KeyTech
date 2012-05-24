@@ -18,7 +18,7 @@ using namespace std;
 /**
  *   Signals a problem with the execution of a socket call.
  */
-class ErrorHandling : public exception {
+class ErrorHandling {
 public:
   /**
    *   Construct a SocketException with a explanatory message.
