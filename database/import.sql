@@ -38,10 +38,10 @@ VALUES ('morning', '08:45:00', '11:59:59'),
 ('afternoon', '14:15:00', '17:29:59'),
 ('whole_day', '08:45:00', '17:30:00');
 
-INSERT INTO reservation (groupname, lockIdentifier, creationDate, repeatInterval, startDate, endDate, reservationTimeName)
-VALUES ('KeyTech', 1, SYSDATE(), 'DAY', DATE(SYSDATE()), DATE(SYSDATE()+2592000), 'whole_day'), -- enddate is current date + 30 days.
-('Teachers', 2, SYSDATE(), 'MONTH', DATE(SYSDATE()), DATE(SYSDATE()+2592000), 'morning'),
-('KeyTech', 3, SYSDATE(), 'WEEK', DATE(SYSDATE()), DATE(SYSDATE()+2592000), 'afternoon');
+INSERT INTO reservation (reservationIdentifier, groupname, lockIdentifier, creationDate, repeatInterval, startDate, endDate, reservationTimeName)
+VALUES (1, 'KeyTech', 1, SYSDATE(), 'DAY', DATE(SYSDATE()), DATE(SYSDATE()+2592000), 'whole_day'), -- enddate is current date + 30 days.
+(2, 'Teachers', 2, SYSDATE(), 'MONTH', DATE(SYSDATE()), DATE(SYSDATE()+2592000), 'morning'),
+(3, 'KeyTech', 3, SYSDATE(), 'WEEK', DATE(SYSDATE()), DATE(SYSDATE()+2592000), 'afternoon');
 
 -- Link tables
 INSERT INTO userAccessGroup (userIdentifier, groupName)
