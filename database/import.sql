@@ -22,12 +22,15 @@ VALUES (123456, 1234, 'Janitor', 'Janitor'),
 INSERT INTO accessGroup (groupname)
 VALUES ('KeyTech'),
 ('Teachers'),
-('Janitors');
+('Janitors'),
+('TeamDropbox');
 
 INSERT INTO room (lockIdentifier, roomName)
 VALUES (1, 'C311'),
 (2, 'C312'),
-(3, 'C3YY');
+(3, 'C3YY')
+(4, 'C1YY')
+(5, 'A109');
 
 INSERT INTO unlimitedAccess (name)
 VALUES ('Janitors');
@@ -39,9 +42,11 @@ VALUES ('morning', '08:45:00', '11:59:59'),
 ('whole_day', '08:45:00', '17:30:00');
 
 INSERT INTO reservation (groupname, lockIdentifier, creationDate, repeatInterval, startDate, endDate, reservationTimeName)
-VALUES ('KeyTech', 1, SYSDATE(), 'DAY', DATE(SYSDATE()), DATE(SYSDATE()+2592000), 'whole_day'), -- enddate is current date + 30 days.
-('Teachers', 2, SYSDATE(), 'MONTH', DATE(SYSDATE()), DATE(SYSDATE()+2592000), 'morning'),
-('KeyTech', 3, SYSDATE(), 'WEEK', DATE(SYSDATE()), DATE(SYSDATE()+2592000), 'afternoon');
+VALUES ('KeyTech', 1, SYSDATE(), 'DAY', DATE(SYSDATE()), DATE_ADD(DATE(SYSDATE()), INTERVAL 4 WEEK), 'whole_day'), -- enddate is current date + 30 days.
+('Teachers', 2, SYSDATE(), 'MONTH', DATE(SYSDATE()), DATE_ADD(DATE(SYSDATE()), INTERVAL 4 WEEK), 'morning'),
+('KeyTech', 3, SYSDATE(), 'WEEK', DATE(SYSDATE()), DATE_ADD(DATE(SYSDATE()), INTERVAL 4 WEEK), 'afternoon'),
+('TeamDropbox', 3, SYSDATE(), 'WEEK', DATE(SYSDATE()), DATE_ADD(DATE(SYSDATE()), INTERVAL 1 WEEK), 'morning');
+('TeamDropbox', 2, SYSDATE(), 'WEEK', DATE(SYSDATE()), DATE_ADD(DATE(SYSDATE()), INTERVAL 1 DAY), 'afternoon');
 
 -- Link tables
 INSERT INTO userAccessGroup (userIdentifier, groupName)
@@ -55,8 +60,9 @@ VALUES ('Janitors', 'Janitors');
 INSERT INTO roomUnlimitedAccess (lockIdentifier, unlimitedAccessName)
 VALUES (1, 'Janitors'),
 (2, 'Janitors'),
-(3, 'Janitors');
-
+(3, 'Janitors'),
+(4, 'Janitors'),
+(5, 'Janitors');
 -- Log tables
 INSERT INTO userLog (userIdentifier, lockIdentifier, logDate)
 VALUES (473712, 3, SYSDATE()-(24*60*60));
