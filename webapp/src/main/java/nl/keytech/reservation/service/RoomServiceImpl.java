@@ -24,4 +24,8 @@ public class RoomServiceImpl implements RoomService {
 	public Room get(String roomName) {
 		return roomRepository.get(roomName);
 	}
+
+	public List<Room> search(String query) {
+		return roomRepository.search(query);
+	}
 }

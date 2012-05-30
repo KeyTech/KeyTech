@@ -12,9 +12,26 @@
 	
 	<context:component-scan base-package="nl.keytech.reservation.web" />
 
-	<mvc:annotation-driven conversion-service="conversionService" />
+<!--	<bean class="nl.keytech.reservation.spring.ConfigurationPostProcessor">
+		<property name="webBindingInitializer" ref="customWebBindingInitializer" />
+	</bean>
+    
+	<bean id="customWebBindingInitializer" class="nl.keytech.reservation.spring.CustomWebBindingInitializer" />-->
+
+	<mvc:annotation-driven conversion-service="conversionService" validator="compoundValidator" />
+	
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />	
+	
+	<bean id="compoundValidator" class="nl.keytech.reservation.spring.CompoundValidator">
+		<constructor-arg ref="validator" />
+		<property name="springValidators">
+			<list>
+				<bean class="nl.keytech.reservation.model.validation.ReservationValidator" />
+			</list>
+		</property>
+	</bean>
 		
-	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+<!--	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>-->
 	
 	<bean id="conversionService" class="nl.keytech.reservation.conversion.ModelConversionService">
 		<property name="convertors">
@@ -53,6 +70,12 @@
 					<property name="conversionMethod" value="getName" />
 				</bean>
 				<bean class="nl.keytech.reservation.conversion.BeanUsingConvertor">
+					<property name="from" value="java.lang.Integer" />
+					<property name="to" value="nl.keytech.reservation.model.Reservation" />
+					<property name="conversionBean" ref="reservationService" />
+					<property name="conversionMethod" value="get" />
+				</bean>
+				<bean class="nl.keytech.reservation.conversion.BeanUsingConvertor">
 					<property name="from" value="java.lang.String" />
 					<property name="to" value="java.util.Calendar" />
 					<property name="conversionBean" ref="dateStringCalendarConvertor" />
@@ -67,8 +90,6 @@
 			</list>
 		</property>
 	</bean>
-
-	<bean id="dateStringCalendarConvertor" class="nl.keytech.reservation.conversion.DateStringCalendarConvertor" />
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:default-servlet-handler />

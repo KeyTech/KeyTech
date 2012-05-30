@@ -8,4 +8,6 @@ public interface GroupService {
 	public List<Group> getAll();
 	
 	public Group get(String name);
+
+	public List<Group> search(String query);
 }
