@@ -8,6 +8,7 @@
 #include "authenticator.h"
 
 Authenticator::Authenticator() {
+    dbconnector = new DataBaseConnector();
 }
 
 Authenticator::~Authenticator() {
@@ -15,13 +16,15 @@ Authenticator::~Authenticator() {
 
 ResponseAnswer Authenticator::authenticate(uint16_t KeyIdentifier, uint32_t UserIdentifier, uint16_t Pincode){
     
-   DataBaseConnector DBconnector;
-   
-   if(DBconnector.mysql_get_query(KeyIdentifier, UserIdentifier, Pincode)){
-      return PERMISSION_GRANTED;
-   } else {
-      return NO_ACCESS; 
-   }
+  dbconnector->mysql_set_query_information(KeyIdentifier, UserIdentifier, Pincode);
      
+  if(dbconnector->mysql_get_access_type()){
+       
+    return PERMISSION_GRANTED;  
+      
+  } else {
+          
+    return dbconnector->mysql_get_permission();     
+  }    
 }
 

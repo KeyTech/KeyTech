@@ -35,11 +35,11 @@ bool Communication::waitForRequest() {
         queryStruct.Flag = 0;
 
         if (request.isTestFrame()) {
-            cout <<  "Debug is test frame :" <<request.isTestFrame() << " \n"<< endl;
+            //cout <<  "Debug is test frame :" <<request.isTestFrame() << " \n"<< endl;
             sendTestResponse();
             return false;
         } else {
-            cout << "No test frame" << endl;
+            //cout << "No test frame" << endl;
             return true;
         }
     } catch (HanException& ex) {
@@ -59,8 +59,8 @@ void Communication::sendTestResponse() {
 
     buffer = response.getFrame();
     
-    cout <<  "Debug testresponse sourceAdress :" << queryStruct.sourceAddress << "\n" << endl;
-    cout <<  "Debug testresponse sourcePort :" << queryStruct.sourcePort << "\n"<< endl;
+    //cout <<  "Debug testresponse sourceAdress :" << queryStruct.sourceAddress << "\n" << endl;
+    //cout <<  "Debug testresponse sourcePort :" << queryStruct.sourcePort << "\n"<< endl;
 
     client->sendTo(buffer, response.getFrameSize(), queryStruct.sourceAddress, queryStruct.sourcePort);
 }

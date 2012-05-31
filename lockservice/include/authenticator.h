@@ -19,6 +19,8 @@ public:
     ResponseAnswer authenticate(uint16_t KeyIdentifier, uint32_t UserIdentifier, uint16_t Pincode);
     
 private:
+    
+    DataBaseConnector *dbconnector;
 
 };
 
