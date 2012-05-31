@@ -122,5 +122,3 @@ CREATE TABLE roomUnlimitedAccess(
 		FOREIGN KEY (unlimitedAccessName) 
 		REFERENCES unlimitedAccess(name)
 );
-
-
