@@ -12,16 +12,10 @@
 
 		<script type="text/javascript" src="resources/js/jquery/jquery-1.7.2.js"></script>
 		<script type="text/javascript" src="resources/js/jquery/jquery-ui-1.8.20.js"></script>
-		<script type="text/javascript" src="resources/js/application.js"></script>		
-
-<!--		<script src="resources/js/jquery/ui.core.js" type="text/javascript"></script>
-		<script src="resources/js/jquery/ui.checkbox.js" type="text/javascript"></script>
-
-		<script src="resources/js/jquery/jquery.tooltip.js" type="text/javascript"></script>
-		<script src="resources/js/jquery/jquery.dimensions.js" type="text/javascript"></script>-->
+		<script type="text/javascript" src="resources/js/application.js"></script>
 	</head>
 	<body> 
-		<div id="page-top-outer">    
+		<div id="page-top-outer">
 			<div id="page-top">
 				<div id="logo">
 					<a href=""><img src="resources/images/shared/logo.png" width="156" height="40" alt="" /></a>
@@ -43,72 +37,58 @@
 					<div class="table">
 					</div>
 
-						<ul class="select"><li><a href="#nogo"><b>Dashboard</b></a>
-								<div class="select_sub">
-									<ul class="sub">
-										<li><a href="#nogo">Dashboard Details 1</a></li>
-										<li><a href="#nogo">Dashboard Details 2</a></li>
-										<li><a href="#nogo">Dashboard Details 3</a></li>
-									</ul>
-								</div>
-							</li>
-						</ul>
+					<ul class="select"><li><a href="#nogo"><b>Dashboard</b></a>
+							<div class="select_sub">
+								<ul class="sub">
+									<li><a href="#nogo">Dashboard Details 1</a></li>
+									<li><a href="#nogo">Dashboard Details 2</a></li>
+									<li><a href="#nogo">Dashboard Details 3</a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
 
-						<div class="nav-divider">&nbsp;</div>
+					<div class="nav-divider">&nbsp;</div>
 
-						<ul class="current"><li><a href="#nogo"><b>Products</b></a>
-								<div class="select_sub show">
-									<ul class="sub">
-										<li><a href="#nogo">View all products</a></li>
-										<li class="sub_show"><a href="#nogo">Add product</a></li>
-										<li><a href="#nogo">Delete products</a></li>
-									</ul>
-								</div>
-							</li>
-						</ul>
+					<ul class="current"><li><a href="reservation"><b>Reserveringen</b></a>
+							<div class="select_sub show">
+								<ul class="sub">
+									<li><a href="reservation">Overzicht</a></li>
+									<li><a href="reservation/create">Nieuwe reservering toevoegen</a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
 
-						<div class="nav-divider">&nbsp;</div>
+					<div class="nav-divider">&nbsp;</div>
 
-						<ul class="select"><li><a href="#nogo"><b>Categories</b></a>
-								<div class="select_sub">
-									<ul class="sub">
-										<li><a href="#nogo">Categories Details 1</a></li>
-										<li><a href="#nogo">Categories Details 2</a></li>
-										<li><a href="#nogo">Categories Details 3</a></li>
-									</ul>
-								</div>
-							</li>
-						</ul>
+					<ul class="select"><li><a href="#nogo"><b>Categories</b></a>
+							<div class="select_sub">
+								<ul class="sub">
+									<li><a href="#nogo">Categories Details 1</a></li>
+									<li><a href="#nogo">Categories Details 2</a></li>
+									<li><a href="#nogo">Categories Details 3</a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
 
-						<div class="nav-divider">&nbsp;</div>
+					<div class="nav-divider">&nbsp;</div>
 
-						<ul class="select"><li><a href="#nogo"><b>Clients</b></a>
-								<div class="select_sub">
-									<ul class="sub">
-										<li><a href="#nogo">Clients Details 1</a></li>
-										<li><a href="#nogo">Clients Details 2</a></li>
-										<li><a href="#nogo">Clients Details 3</a></li>
+					<ul class="select"><li><a href="#nogo"><b>Clients</b></a>
+							<div class="select_sub">
+								<ul class="sub">
+									<li><a href="#nogo">Clients Details 1</a></li>
+									<li><a href="#nogo">Clients Details 2</a></li>
+									<li><a href="#nogo">Clients Details 3</a></li>
 
-									</ul>
-								</div>
-							</li>
-						</ul>
-
-						<div class="nav-divider">&nbsp;</div>
-
-						<ul class="select"><li><a href="#nogo"><b>News</b></a>
-								<div class="select_sub">
-									<ul class="sub">
-										<li><a href="#nogo">News details 1</a></li>
-										<li><a href="#nogo">News details 2</a></li>
-										<li><a href="#nogo">News details 3</a></li>
-									</ul>
-								</div>
-							</li>
-						</ul>
-					</div>
+								</ul>
+							</div>
+						</li>
+					</ul>
 				</div>
 			</div>
+		</div>
 		</div>
 
 		<div id="content-outer">

@@ -50,4 +50,5 @@
 		<property name="fallbackToSystemLocale" value="false" />
 	</bean>
 
+	<bean id="dateStringCalendarConvertor" class="nl.keytech.reservation.conversion.DateStringCalendarConvertor" />
 </beans>

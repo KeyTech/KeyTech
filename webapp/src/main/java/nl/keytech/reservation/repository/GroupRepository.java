@@ -26,4 +26,12 @@ public class GroupRepository {
 		
 		return (Group) session.get(Group.class, name);
 	}
+	
+	public List<Group> search(String query) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		return (List<Group>) session.createQuery("FROM Group G WHERE G.groupName LIKE :groupName ORDER BY G.groupName")
+				.setParameter("groupName", query + "%")
+				.setMaxResults(10).list();
+	}
 }

@@ -7,4 +7,5 @@ public interface RoomService {
 	
 	public List<Room> getAll();
 	public Room get(String roomName);
+	public List<Room> search(String query);
 }
