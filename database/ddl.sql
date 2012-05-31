@@ -43,6 +43,7 @@ CREATE TABLE reservationTime(
 );
 
 CREATE TABLE reservation(
+	reservationIdentifier INT NOT NULL AUTO_INCREMENT,
 	groupName VARCHAR(30) NOT NULL,
 	lockIdentifier SMALLINT UNSIGNED NOT NULL,
 	creationDate DATETIME NOT NULL,
@@ -50,7 +51,8 @@ CREATE TABLE reservation(
 	startDate DATE NOT NULL,
 	endDate DATE NULL,
 	reservationTimeName VARCHAR(30) NOT NULL,
-	CONSTRAINT pk_reservation PRIMARY KEY(groupName, lockIdentifier, startDate),
+	CONSTRAINT pk_reservation PRIMARY KEY(reservationIdentifier),
+	CONSTRAINT ak_reservation UNIQUE(groupName, lockIdentifier, startDate),
 	CONSTRAINT fk_reservation_accessGroup 
 		FOREIGN KEY (groupName)
 		REFERENCES accessGroup(groupName),

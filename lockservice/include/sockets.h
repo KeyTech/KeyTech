@@ -32,6 +32,8 @@ public:
    * Close and deallocate this socket
    */
   ~Sockets();
+  
+  Sockets();
        
   /**
    * Set a specified local port and local address
@@ -40,12 +42,11 @@ public:
    */
   void setLocalAddressAndPort(const string &localaddress, unsigned short &localPort) throw(ErrorHandling);
   
-  void setBuffer(void *buffer);
+  virtual void sendTo(const void *buffer, int bufferLen, const string &foreignAddress, unsigned short foreignPort) throw(ErrorHandling);
   
-  char * getBuffer();
+  virtual int recvFrom(void *buffer, int bufferLen, string &sourceAddress, unsigned short &sourcePort) throw(ErrorHandling);
   
 private:
-  char *comBuffer;
     
 protected:      
   int socketDesc; // Socket Descriptor
@@ -61,7 +62,7 @@ protected:
 /**
  * UDP sockets extens sockets
  */ 
-class UDPSocket : Sockets {
+class UDPSocket : public Sockets {
 public:
    
   /**

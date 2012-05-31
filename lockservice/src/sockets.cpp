@@ -26,7 +26,12 @@ static void fillAddr(const string &address, unsigned short &port, sockaddr_in &a
 /**
  * Socket Code
  */
+Sockets::Sockets(){
+    
+}
+
 Sockets::Sockets(int type, int protocol) throw(ErrorHandling){
+    
     // Make a new socket
   if ((socketDesc = socket(PF_INET, type, protocol)) < 0) {
     throw ErrorHandling("Socket creation failed (socket())", true);
@@ -47,17 +52,35 @@ void Sockets::setLocalAddressAndPort(const string &localaddress, unsigned short 
   }
 }
 
-void Sockets::setBuffer(void *buffer){
-        
-    comBuffer = (char *)buffer;
+
+
+void Sockets::sendTo(const void *buffer, int bufferLen, const string &foreignAddress, unsigned short foreignPort) throw(ErrorHandling){
+    
+  sockaddr_in destAddr;
+  fillAddr(foreignAddress, foreignPort, destAddr);
+
+  // Write out the whole buffer as a single message.
+  if (sendto(socketDesc, (raw_type *) buffer, bufferLen, 0,(sockaddr *) &destAddr, sizeof(destAddr)) != bufferLen) {
+    throw ErrorHandling("Send failed (sendto())", true);
+  }
 }
 
-char * Sockets::getBuffer(){
-   
-   cout << "\n\n Testje = " << comBuffer << endl;
-     
-   return comBuffer;
+int Sockets::recvFrom(void *buffer, int bufferLen, string &sourceAddress, unsigned short &sourcePort) throw(ErrorHandling) {
+    
+  sockaddr_in clntAddr;
+  socklen_t addrLen = sizeof(clntAddr);
+  int rtn;
+  
+  if ((rtn = recvfrom(socketDesc, (raw_type *) buffer, bufferLen, 0, (sockaddr *) &clntAddr, (socklen_t *) &addrLen)) < 0) {
+    throw ErrorHandling("Receive failed (recvfrom())", true);
+  }
+  
+  sourceAddress = inet_ntoa(clntAddr.sin_addr);
+  sourcePort = ntohs(clntAddr.sin_port);
+
+  return rtn;
 }
+
 
 /**
  * UDPSocket Code
@@ -71,8 +94,6 @@ UDPSocket::UDPSocket(const string &localaddress, unsigned short &localPort) thro
 UDPSocket::~UDPSocket(){
 }
 
-
-
 void UDPSocket::sendTo(const void *buffer, int bufferLen, const string &foreignAddress, unsigned short foreignPort) throw(ErrorHandling){
     
   sockaddr_in destAddr;
@@ -82,8 +103,6 @@ void UDPSocket::sendTo(const void *buffer, int bufferLen, const string &foreignA
   if (sendto(socketDesc, (raw_type *) buffer, bufferLen, 0,(sockaddr *) &destAddr, sizeof(destAddr)) != bufferLen) {
     throw ErrorHandling("Send failed (sendto())", true);
   }
-  
-  cout << "\n\n Testje2 = " << getBuffer() << endl;
 }
 
 int UDPSocket::recvFrom(void *buffer, int bufferLen, string &sourceAddress, unsigned short &sourcePort) throw(ErrorHandling) {
@@ -95,8 +114,6 @@ int UDPSocket::recvFrom(void *buffer, int bufferLen, string &sourceAddress, unsi
   if ((rtn = recvfrom(socketDesc, (raw_type *) buffer, bufferLen, 0, (sockaddr *) &clntAddr, (socklen_t *) &addrLen)) < 0) {
     throw ErrorHandling("Receive failed (recvfrom())", true);
   }
-  
-  setBuffer(buffer);
   
   sourceAddress = inet_ntoa(clntAddr.sin_addr);
   sourcePort = ntohs(clntAddr.sin_port);
