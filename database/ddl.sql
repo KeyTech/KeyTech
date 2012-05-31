@@ -14,6 +14,7 @@ CREATE TABLE user (
 	pincode SMALLINT UNSIGNED NOT NULL,
 	firstname VARCHAR(40) NOT NULL,
 	lastname VARCHAR(40) NOT NULL,
+	blocked BOOLEAN NOT NULL DEFAULT FALSE,
 	CONSTRAINT pk_user PRIMARY KEY (userIdentifier)
 );
 
