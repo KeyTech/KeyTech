@@ -28,4 +28,8 @@ public class GroupServiceImpl implements GroupService {
 	public List<Group> search(String query) {
 		return groupRepository.search(query);
 	}
+
+	public void save(Group group) {
+		groupRepository.save(group);
+	}
 }

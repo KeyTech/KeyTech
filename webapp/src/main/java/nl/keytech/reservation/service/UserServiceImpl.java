@@ -20,4 +20,8 @@ public class UserServiceImpl implements UserService {
 	public List<User> getAll() {
 		return userRepository.getAll();
 	}
+
+	public List<User> search(String query) {
+		return userRepository.search(query);
+	}
 }

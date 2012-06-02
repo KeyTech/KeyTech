@@ -1,6 +1,34 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<div id="create-group-dialog" title="Nieuwe groep">
+	<table border="0" cellpadding="0" cellspacing="0"  id="id-form">
+		<tr class="user-add-error">
+			<td colspan="2"></td>
+		</tr>
+		<tr>
+			<th valign="top">Groepsnaam:</th>
+			<td><input type="text" class="groupname" class="inp-form" /></td>
+		</tr>	
+		<tr id="users">
+			<th valign="top">Leden:</th>
+		</tr>
+		<tr>
+			<td colspan="2"><div class="user">Stefan Jansen (466271)</div></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="text" name="user" class="add-user inp-form" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="submit" value="Opslaan" class="save-group inp-form" />
+			</td>
+		</tr>
+	</table>
+</div>
+
 <div id="page-heading">
 	<h1>
 		<c:choose>
@@ -45,6 +73,7 @@
 											<c:if test="${reservation.reservationIdentifier != null}">
 												<form:hidden path="group" />													
 											</c:if>
+											<a class="edit-button group-edit" href="#"></a>
 										</td>
 										<td>
 											<form:errors path="group" cssClass="error-inner" />

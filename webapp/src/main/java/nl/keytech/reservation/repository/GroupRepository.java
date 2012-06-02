@@ -34,4 +34,10 @@ public class GroupRepository {
 				.setParameter("groupName", query + "%")
 				.setMaxResults(10).list();
 	}
+	
+	public void save(Group group) {
+		Session session = sessionFactory.getCurrentSession();
+
+		session.save(group);
+	}
 }
