@@ -23,12 +23,12 @@ VALUES (123456, 1234, 'Janitor', 'Janitor'),
 (777888, 9999, 'Boy', 'Wonder'), -- No assigned group yet.
 (654321, 4321, 'Lazy', 'Guy I');
 
-INSERT INTO accessGroup (groupname)
-VALUES ('KeyTech'),
-('Teachers'),
-('Janitors'),
-('TeamDropbox'),
-('TeamGamers');
+INSERT INTO accessGroup (groupname, expirationDate)
+VALUES ('KeyTech', '2012-06-30'),
+('Teachers', '2012-06-30'),
+('Janitors', '2012-06-30'),
+('TeamDropbox', '2012-06-30'),
+('TeamGamers', '2012-06-30');
 
 INSERT INTO room (lockIdentifier, roomName)
 VALUES (1, 'C311'),

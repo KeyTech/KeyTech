@@ -14,12 +14,12 @@
 	
 	<context:component-scan base-package="nl.keytech.reservation.web" />
 
-	<mvc:annotation-driven conversion-service="conversionService" validator="compoundValidator" />
+	<mvc:annotation-driven conversion-service="conversionService" validator="validator" />
 	
-	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />	
+	<bean id="defaultValidator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />	
 	
-	<bean id="compoundValidator" class="nl.keytech.reservation.spring.CompoundValidator">
-		<constructor-arg ref="validator" />
+	<bean id="validator" class="nl.keytech.reservation.spring.CompoundValidator">
+		<constructor-arg ref="defaultValidator" />
 		<property name="springValidators">
 			<list>
 				<bean class="nl.keytech.reservation.model.validation.ReservationValidator" />

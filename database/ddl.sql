@@ -20,6 +20,7 @@ CREATE TABLE user (
 
 CREATE TABLE accessGroup (
 	groupName VARCHAR(30) NOT NULL,
+	expirationDate DATE NOT NULL,
 	CONSTRAINT pk_accessGroup PRIMARY KEY (groupName)
 );
 

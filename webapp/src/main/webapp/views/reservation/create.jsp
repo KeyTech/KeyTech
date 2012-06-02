@@ -8,13 +8,14 @@
 		</tr>
 		<tr>
 			<th valign="top">Groepsnaam:</th>
-			<td><input type="text" class="groupname" class="inp-form" /></td>
+			<td><input type="text" class="groupname inp-form" /></td>
+		</tr>	
+		<tr>
+			<th valign="top">Vervaldatum:</th>
+			<td><input type="text" class="expirationDate datepicker inp-form" /></td>
 		</tr>	
 		<tr id="users">
 			<th valign="top">Leden:</th>
-		</tr>
-		<tr>
-			<td colspan="2"><div class="user">Stefan Jansen (466271)</div></td>
 		</tr>
 		<tr>
 			<td colspan="2">
@@ -22,8 +23,8 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2">
-				<input type="submit" value="Opslaan" class="save-group inp-form" />
+			<td colspan="2" style="text-align: right;">
+				<input type="submit" value="Opslaan" class="save-group form-submit" />
 			</td>
 		</tr>
 	</table>

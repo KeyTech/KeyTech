@@ -48,12 +48,10 @@
 					<div class="table">
 					</div>
 
-					<ul class="select"><li><a href="#nogo"><b>Dashboard</b></a>
+					<ul class="select"><li><a href="log"><b>Overzicht</b></a>
 							<div class="select_sub">
 								<ul class="sub">
-									<li><a href="#nogo">Dashboard Details 1</a></li>
-									<li><a href="#nogo">Dashboard Details 2</a></li>
-									<li><a href="#nogo">Dashboard Details 3</a></li>
+									<li><a href="log">Gebeurtenissen</a></li>
 								</ul>
 							</div>
 						</li>

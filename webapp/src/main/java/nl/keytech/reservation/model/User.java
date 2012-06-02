@@ -11,18 +11,18 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @Table(name = "user")
 public class User implements Serializable {
 	
-	private int userIdentifier;
+	private Integer userIdentifier;
 	private short pincode;
 	private String firstname;
 	private String lastname;
 
 	@Id
 	@Column(name = "userIdentifier")
-	public int getUserIdentifier() {
+	public Integer getUserIdentifier() {
 		return userIdentifier;
 	}
 
-	public void setUserIdentifier(int userIdentifier) {
+	public void setUserIdentifier(Integer userIdentifier) {
 		this.userIdentifier = userIdentifier;
 	}
 

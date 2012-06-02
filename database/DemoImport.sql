@@ -21,10 +21,10 @@ VALUES (123456, 1234, 'Janitor', 'Janitor'),
 (787878, 7878, 'Student1', 'Student1'),
 (909090, 9090, 'Student2', 'Student2');
 
-INSERT INTO accessGroup (groupname)
-VALUES ('Students'),
-('Teachers'),
-('Office');
+INSERT INTO accessGroup (groupname, expirationDate)
+VALUES ('Students', '2012-06-30'),
+('Teachers', '2012-06-30'),
+('Office', '2012-06-30');
 
 INSERT INTO room (lockIdentifier, roomName)
 VALUES (1, 'C311'),
@@ -40,7 +40,7 @@ VALUES ('morning', '08:45:00', '11:59:59'),
 ('midday', '12:00:00', '14:14:59'),
 ('afternoon', '14:15:00', '17:29:59'),
 ('whole_day', '08:45:00', '17:30:00');
-
+-+
 INSERT INTO reservation (groupname, lockIdentifier, creationDate, repeatInterval, startDate, endDate, reservationTimeName)
 VALUES ('Teachers', 1, SYSDATE(), 'DAY', DATE(SYSDATE()), DATE_ADD(DATE(SYSDATE()), INTERVAL 1 DAY), 'whole_day'), -- enddate is current date + 30 days.
 ('Teachers', 2, SYSDATE(), 'MONTH', DATE(SYSDATE()), DATE_ADD(DATE(SYSDATE()), INTERVAL 4 WEEK), 'midday'),

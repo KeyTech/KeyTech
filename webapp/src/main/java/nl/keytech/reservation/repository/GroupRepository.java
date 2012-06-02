@@ -38,6 +38,6 @@ public class GroupRepository {
 	public void save(Group group) {
 		Session session = sessionFactory.getCurrentSession();
 
-		session.save(group);
+		session.saveOrUpdate(group);
 	}
 }
