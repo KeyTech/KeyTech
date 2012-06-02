@@ -90,14 +90,14 @@ void DataBaseConnector::mysql_set_query_user_permission() {
          "JOIN reservationTime T ON R.reservationTimeName = T.name "           
          "WHERE R.lockIdentifier = " << queryStruct.KeyIdentifier <<
          " AND U.userIdentifier = " << queryStruct.UserIdentifier <<
-         " AND T.startTime <= CURRENT_TIME() AND T.endTime >= CURRENT_TIME()"
+         " AND (T.startTime <= CURRENT_TIME() AND T.endTime >= CURRENT_TIME()"
          " AND R.startDate <= CURRENT_DATE() AND (R.endDate >= CURRENT_DATE()"
          " OR R.endDate IS NULL)" 
          " AND ("
          " R.repeatInterval = 'DAY' OR"
          " (R.repeatInterval = 'WEEK' AND DAYOFWEEK(CURRENT_DATE()) = DAYOFWEEK(R.startDate)))" 
          " OR"
-         " (R.repeatInterval = 'MONTH' AND DAYOFMONTH(CURRENT_DATE()) = DAYOFMONTH(R.startDate))";
+         " (R.repeatInterval = 'MONTH' AND DAYOFMONTH(CURRENT_DATE()) = DAYOFMONTH(R.startDate)))";
      
   s = out.str();
 

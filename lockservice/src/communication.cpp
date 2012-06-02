@@ -32,14 +32,16 @@ bool Communication::waitForRequest() {
         queryStruct.KeyIdentifier = request.getKeyIdentifier();
         queryStruct.UserIdentifier = request.getUserIdentifier();
         queryStruct.PinCode = request.getCode();
-        queryStruct.Flag = 0;
+        //queryStruct.Flag = 0;
 
-        if (request.isTestFrame()) {
-            //cout <<  "Debug is test frame :" <<request.isTestFrame() << " \n"<< endl;
+        if (request.isTestFrame()) {             
+            ss << "Test frame ontvangen van IP-nummer[" << queryStruct.sourceAddress << "], Poortnummer[" << queryStruct.sourcePort << "], Slotnummer["<< queryStruct.KeyIdentifier << "] ";
+            Logger::info(ss.str());
             sendTestResponse();
             return false;
         } else {
-            //cout << "No test frame" << endl;
+            ss << "Request ontvangen van IP-nummer[" << queryStruct.sourceAddress << "], Poortnummer[" << queryStruct.sourcePort << "], Slotnummer["<< queryStruct.KeyIdentifier << "] ";
+            Logger::info(ss.str());
             return true;
         }
     } catch (HanException& ex) {
@@ -59,9 +61,9 @@ void Communication::sendTestResponse() {
 
     buffer = response.getFrame();
     
-    //cout <<  "Debug testresponse sourceAdress :" << queryStruct.sourceAddress << "\n" << endl;
-    //cout <<  "Debug testresponse sourcePort :" << queryStruct.sourcePort << "\n"<< endl;
-
+    ss << "Test response terug sturen naar IP-nummer[" << queryStruct.sourceAddress << "], Poortnummer[" << queryStruct.sourcePort << "], Slotnummer["<< queryStruct.KeyIdentifier << "] ";
+    Logger::info(ss.str());
+    
     client->sendTo(buffer, response.getFrameSize(), queryStruct.sourceAddress, queryStruct.sourcePort);
 }
 
@@ -77,6 +79,9 @@ void Communication::sendResponse(ResponseAnswer flags) {
 
     buffer = response.getFrame();
 
+    ss << "Response terug sturen naar IP-nummer[" << queryStruct.sourceAddress << "], Poortnummer[" << queryStruct.sourcePort << "], Slotnummer["<< queryStruct.KeyIdentifier << "], Flag[" << flags << "]";
+    Logger::info(ss.str());
+    
     client->sendTo(buffer, response.getFrameSize(), queryStruct.sourceAddress, queryStruct.sourcePort);
 }
 
