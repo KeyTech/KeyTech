@@ -24,4 +24,8 @@ public class GroupServiceImpl implements GroupService {
 	public Group get(String name) {
 		return groupRepository.get(name);
 	}
+	
+	public List<Group> search(String query) {
+		return groupRepository.search(query);
+	}
 }

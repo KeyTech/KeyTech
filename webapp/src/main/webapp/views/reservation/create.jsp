@@ -1,8 +1,17 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<div id="page-heading"><h1>Nieuwe reservering</h1></div>
+<div id="page-heading">
+	<h1>
+		<c:choose>
+			<c:when test="${reservation.reservationIdentifier == null}">Nieuwe reservering</c:when>
+			<c:otherwise>Wijzigen reservering</c:otherwise>
+		</c:choose>
+	</h1>
+</div>
 
 <form:form method="post" modelAttribute="reservation">
+	<form:hidden path="reservationIdentifier" />
 	<table border="0" width="100%" cellpadding="0" cellspacing="0" id="content-table">
 		<tr>
 			<th rowspan="3" class="sized"><img src="resources/images/shared/side_shadowleft.jpg" width="20" height="300" alt="" /></th>
@@ -24,20 +33,25 @@
 								<table border="0" cellpadding="0" cellspacing="0"  id="id-form">
 									<tr>
 										<th valign="top">Ruimte:</th>
-										<td><form:input path="room" cssClass="inp-form" /></td>
+										<td><form:input path="room" cssClass="inp-form room-autocomplete" /></td>
 										<td>
 											<form:errors path="room" cssClass="error-inner" />
 										</td>
 									</tr>
 									<tr>
 										<th valign="top">Groep:</th>
-										<td><form:input path="group" cssClass="inp-form" /></td>
+										<td>
+											<form:input path="group" cssClass="inp-form group-autocomplete" disabled="${reservation.reservationIdentifier != null}" />													
+											<c:if test="${reservation.reservationIdentifier != null}">
+												<form:hidden path="group" />													
+											</c:if>
+										</td>
 										<td>
 											<form:errors path="group" cssClass="error-inner" />
 										</td>
 									</tr>
 									<tr>
-										<th valign="top">Begin datum:</th>
+										<th valign="top">Begindatum:</th>
 										<td>	
 											<form:input path="startDate" cssClass="inp-form datepicker" />
 										</td>
@@ -46,7 +60,7 @@
 										</td>
 									</tr>
 									<tr>
-										<th valign="top">Eind datum:</th>
+										<th valign="top">Einddatum:</th>
 										<td>
 											<form:input path="endDate" cssClass="inp-form datepicker" />
 										</td>
@@ -78,8 +92,8 @@
 									<tr>
 										<th>&nbsp;</th>
 										<td valign="top">
-											<input type="submit" value="" class="form-submit" />
-											<input type="reset" value="" class="form-reset"  />
+											<input type="submit" value="Opslaan" class="form-submit" />
+											<input type="reset" value="Reset" class="form-reset"  />
 										</td>
 										<td></td>
 									</tr>

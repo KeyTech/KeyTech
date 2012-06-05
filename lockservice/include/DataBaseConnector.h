@@ -26,12 +26,42 @@ public:
     
   ~DataBaseConnector();
   
-  bool mysql_get_query(uint16_t KeyIdentifier, uint32_t UserIdentifier, uint16_t Pincode);
-    
+  MYSQL* mysql_connection_setup(const char *server, const char *user, const char *password, const char *database);
+  
+  MYSQL_RES* mysql_perform_query(MYSQL *connection, char *sql_query);
+  
+  void mysql_set_query_user_permission();
+  
+  void mysql_set_query_access_rights();
+  
+  ResponseAnswer mysql_get_permission();
+  
+  bool mysql_get_access_type();
+  
+  void mysql_set_query_information(uint16_t KeyIdentifier, uint32_t UserIdentifier, uint16_t Pincode);
+  
+  void userLogging(ResponseAnswer theResult);
+  
+  string responseAnswerConverter(ResponseAnswer theResult);
+  
+  void countLogTries(uint32_t UserIdentifier);
+  
+  void updateUserStatus();
+   
+private:
+  struct qrStruct {       
+        uint16_t KeyIdentifier;
+        uint32_t UserIdentifier;
+        uint16_t PinCode;       
+  } queryStruct;
+  
+  
 protected:
 
   MYSQL *conn;
-    
+  MYSQL_RES *res;
+  MYSQL_RES *logres;
+  MYSQL_ROW row;
 };
 
 #endif	/* DBCONNECTOR_H */

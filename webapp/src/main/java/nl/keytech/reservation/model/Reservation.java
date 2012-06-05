@@ -3,9 +3,7 @@ package nl.keytech.reservation.model;
 import java.util.Calendar;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import nl.keytech.reservation.model.constraint.ReservationStartEndDate;
 
-@ReservationStartEndDate
 @Entity
 @Table(name = "reservation", uniqueConstraints=@UniqueConstraint(columnNames={"groupName", "lockIdentifier", "startDate"}))
 public class Reservation {
@@ -13,7 +11,7 @@ public class Reservation {
 	public enum Interval {
 		DAY, WEEK, MONTH
 	};
-	private int reservationIdentifier;
+	private Integer reservationIdentifier;
 	private Group group;
 	private Room room;
 	private Calendar creationDate;
@@ -25,17 +23,17 @@ public class Reservation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "reservationIdentifier")
-	public int getReservationIdentifier() {
+	public Integer getReservationIdentifier() {
 		return reservationIdentifier;
 	}
 
-	public void setReservationIdentifier(int reservationIdentifier) {
+	public void setReservationIdentifier(Integer reservationIdentifier) {
 		this.reservationIdentifier = reservationIdentifier;
 	}
 
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "groupName", referencedColumnName = "groupName")
+	@JoinColumn(name = "groupName", referencedColumnName = "groupName", updatable = false)
 	public Group getGroup() {
 		return group;
 	}
@@ -56,7 +54,7 @@ public class Reservation {
 	}
 
 	@NotNull
-	@Column(name = "creationDate")
+	@Column(name = "creationDate", updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	public Calendar getCreationDate() {
 		return creationDate;

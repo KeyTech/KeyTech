@@ -2,6 +2,7 @@ package nl.keytech.reservation.model;
 
 import java.util.List;
 import javax.persistence.*;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
 @Table(name = "accessGroup")
@@ -20,6 +21,7 @@ public class Group {
 		this.groupName = groupName;
 	}
 
+	@JsonIgnore
 	@ManyToMany(targetEntity = User.class)
 	@JoinTable(
 			name = "userAccessGroup",

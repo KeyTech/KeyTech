@@ -28,4 +28,13 @@ public class RoomRepository {
 		
 		return (Room) session.createQuery("FROM Room R WHERE R.roomName = :roomName").setParameter("roomName", roomName).uniqueResult();
 	}
+	
+	public List<Room> search(String query) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		return (List<Room>) session
+				.createQuery("FROM Room R WHERE R.roomName LIKE :roomName ORDER BY R.roomName")
+				.setParameter("roomName", query + "%")
+				.setMaxResults(10).list();		
+	}
 }
