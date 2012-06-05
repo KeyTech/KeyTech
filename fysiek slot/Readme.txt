@@ -1,0 +1,2 @@
+Kopieer deze twee folders in je Documenten/Arduino map en importeer het bestand Slot.pde dan in je Arduino IDE installatie.
+Je kan deze .pde ook importeren in je visual studio installatie. Denk er dan nog aan het goede type bord te kiezen.
