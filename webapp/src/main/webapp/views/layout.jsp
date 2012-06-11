@@ -1,24 +1,27 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" isELIgnored="false" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>KeyTech</title>
-		<base href="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.servletContext.contextPath}/" />
+		<base href="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
 
 		<link rel="stylesheet" href="resources/css/screen.css" type="text/css" media="screen" title="default" />
-		<link type="text/css" href="resources/css/custom-theme/jquery-ui-1.8.20.custom.css" rel="stylesheet" />
+		<link type="text/css" href="resources/css/custom-theme/jquery-ui-1.8.21.custom.css" rel="stylesheet" />
 
 		<script type="text/javascript" src="resources/js/jquery/jquery-1.7.2.js"></script>
-		<script type="text/javascript" src="resources/js/jquery/jquery-ui-1.8.20.js"></script>
+		<script type="text/javascript" src="resources/js/jquery/jquery-ui-1.8.21.js"></script>
 		<script type="text/javascript" src="resources/js/application.js"></script>
 	</head>
 	<body> 
 		<div id="page-top-outer">
 			<div id="page-top">
 				<div id="logo">
-					<a href=""><img src="resources/images/shared/logo.png" width="156" height="40" alt="" /></a>
+					<a href="">
+						<img src="resources/images/shared/logo.png" width="156" height="40" alt="" />
+					</a>
 				</div>
 			</div>
 		</div>
@@ -29,8 +32,16 @@
 				<div id="nav-right">
 
 					<div class="nav-divider">&nbsp;</div>
-					<a href="" id="logout"><img src="resources/images/shared/nav/nav_logout.gif" width="64" height="14" alt="" /></a>
-
+					<sec:authorize access="isAuthenticated()">
+					<a href="j_spring_security_logout" id="logout">
+						<img src="resources/images/shared/nav/nav_logout.gif" width="14" height="14" alt="" /> Logout
+					</a>
+					</sec:authorize>
+					<sec:authorize access="isAnonymous()">
+					<a href="login" id="logout">
+						<img src="resources/images/shared/nav/nav_logout.gif" width="14" height="14" alt="" /> Login
+					</a>
+					</sec:authorize>					
 				</div>
 
 				<div class="nav">

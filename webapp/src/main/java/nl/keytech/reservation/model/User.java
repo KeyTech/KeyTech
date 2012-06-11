@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
 @Table(name = "user")
@@ -43,6 +44,7 @@ public class User implements Serializable {
 		this.lastname = lastname;
 	}
 
+	@JsonIgnore
 	@Column(name = "pincode")
 	public short getPincode() {
 		return pincode;

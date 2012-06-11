@@ -10,4 +10,6 @@ public interface GroupService {
 	public Group get(String name);
 
 	public List<Group> search(String query);
+	
+	public void save(Group group);
 }
