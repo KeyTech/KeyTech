@@ -10,12 +10,15 @@
 
 #include <string>
 #include <iostream>
+#include <sstream>
 #include "sockets.h"
 #include "han.h"
 #include "HanRequest.h"
 #include "HanResponse.h"
 #include "HanException.h"
 #include "Defines.h"
+#include "Logger.h"
+
 
 class Communication {
 public:
@@ -37,6 +40,8 @@ private:
     Sockets *client;
     
     int recvMsgSize;
+    
+    stringstream ss;
     
     void sendTestResponse();
     
