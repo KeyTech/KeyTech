@@ -24,7 +24,8 @@ VALUES (123456, 1234, 'Janitor', 'Janitor'),
 INSERT INTO accessGroup (groupName, expirationDate)
 VALUES ('Students', '2012-06-30'),
 ('Teachers', '2012-06-30'),
-('Office', '2012-06-30');
+('Office', '2012-06-30'),
+('Janitors', '3000-01-01');
 
 INSERT INTO room (lockIdentifier, roomName)
 VALUES (1, 'C311'),
@@ -64,12 +65,11 @@ INSERT INTO roomUnlimitedAccess (lockIdentifier, unlimitedAccessName)
 VALUES (1, 'Janitors'),
 (2, 'Janitors'),
 (3, 'Janitors'),
-(4, 'Janitors'),
-(5, 'Janitors');
+(4, 'Janitors');
 
 -- Log tables
 INSERT INTO userLog (userIdentifier, lockIdentifier, logDate)
-VALUES (473712, 3, NOW());
+VALUES (909090, 3, NOW());
 
 INSERT INTO testFrameLog (lockIdentifier, receivedDate)
 VALUES (2, NOW());
