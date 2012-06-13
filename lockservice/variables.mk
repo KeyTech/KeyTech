@@ -26,8 +26,8 @@ GTEST_CPP_FILES := contrib/googletest/gmock-gtest-all.cc
 MAIN_DEBUG_OBJ := $(DEBUG_OBJ_DIR)/main.o
 
 # Includes:
-INCLUDES := -I include -I contrib/mysql/include
+INCLUDES := -I include
 TEST_INCLUDES := $(INCLUDES) -I contrib
-OPTIONS := -Wall -Lcontrib/mysql/lib32 -Lcontrib/mysql/lib64 -lmysqlclient -lpthread -lz -lm -lrt -ldl -DBIG_JOINS=1  -fno-strict-aliasing  -g 
+OPTIONS := -Wall $(shell mysql_config --libs) $(shell mysql_config --cflags)	
 DEBUG_OPTIONS := $(OPTIONS) -ggdb
 TEST_OPTIONS := $(DEBUG_OPTIONS) -pthread
