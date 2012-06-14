@@ -15,7 +15,7 @@
 		<div id="login-holder">
 
 			<div id="logo-login">
-				<a href="index.html"><img src="resources/images/shared/logo.png" width="156" height="40" alt="" /></a>
+				<a href="index.html"><img src="resources/images/shared/logo.jpg" width="156" height="40" alt="" /></a>
 			</div>
 
 			<div class="clear"></div>

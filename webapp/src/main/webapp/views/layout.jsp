@@ -20,7 +20,7 @@
 			<div id="page-top">
 				<div id="logo">
 					<a href="">
-						<img src="resources/images/shared/logo.png" width="156" height="40" alt="" />
+						<img src="resources/images/shared/logo.jpg" width="156" height="40" alt="" />
 					</a>
 				</div>
 			</div>
