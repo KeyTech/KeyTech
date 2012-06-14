@@ -17,10 +17,9 @@ public:
     LockService(int argc, char** argv);
     ~LockService();
 private:
-   
     Communication *communicaton;
     Authenticator *authenticator;
-    
+    stringstream ss;   
 };
 
 #endif	/* LOCKSERVICE_H */

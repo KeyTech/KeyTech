@@ -6,8 +6,10 @@ LockService::LockService(int argc, char** argv){
   
   authenticator = new Authenticator();
     
-  for(;;){   
-    cout << "\nWaiting for data... \n" << endl;
+  for(;;){      
+    ss << "Waiting for data...";
+    Logger::info(ss.str());
+    ss.str("");
     if(communicaton->waitForRequest()) {
       communicaton->sendResponse(authenticator->authenticate(communicaton->getKeyIdentifier(), communicaton->getUserIdentifier(), communicaton->getPincode()));
     }  

@@ -11,9 +11,9 @@
 DataBaseConnector::DataBaseConnector() {
     
   const char *server = "localhost"; 
-  const char *user = "root";
-  const char *password = "test";
-  const char *database = "slotservice";
+  const char *user = "keytech";
+  const char *password = "appelmoes";
+  const char *database = "lockservice";
   
   conn = mysql_connection_setup(server, user, password, database);  
 }
@@ -135,15 +135,17 @@ ResponseAnswer DataBaseConnector::mysql_get_permission(){
   if(num_result > 0){      
     if((strcmp(row[3], "0") == 0) && (strcmp(row[2], cstr) == 0)){
      
-      ss << "User[" << queryStruct.UserIdentifier << "] has Permission for key[" << queryStruct.KeyIdentifier << "].";
-      Logger::debug(ss.str());   
+      ss << "User[" << queryStruct.UserIdentifier << "] has Permission for room[" << queryStruct.KeyIdentifier << "].";
+      Logger::debug(ss.str());
+      ss.str("");
       
       userLogging(PERMISSION_GRANTED);
       return PERMISSION_GRANTED;
     } else if((strcmp(row[3], "1") == 0) && ((strcmp(row[2], cstr) == 0) || (strcmp(row[2], cstr) != 0))) {
       
       ss << "User[" << queryStruct.UserIdentifier << "] is blocked.";
-      Logger::debug(ss.str()); 
+      Logger::debug(ss.str());
+      ss.str("");
       
       userLogging(USER_BLOCKED);
       return USER_BLOCKED;
@@ -153,7 +155,8 @@ ResponseAnswer DataBaseConnector::mysql_get_permission(){
       row = mysql_fetch_row(res);
 
       ss << "User[" << queryStruct.UserIdentifier << "] used a wrong pincode for room[" << queryStruct.KeyIdentifier << "].";
-      Logger::debug(ss.str()); 
+      Logger::debug(ss.str());
+      ss.str("");
       
       if(atoi(row[0]) >= 5){
          userLogging(USER_BLOCKED); 
@@ -161,18 +164,24 @@ ResponseAnswer DataBaseConnector::mysql_get_permission(){
          
          ss << "User[" << queryStruct.UserIdentifier << "] is now blocked.";
          Logger::debug(ss.str());
+         ss.str("");
          
          return USER_BLOCKED; 
       } else {
          userLogging(NO_ACCESS); 
          //printf("User has %u tries left \n", (5 - atoi(row[0])));
-         int tries = 5 - atoi(row[0]);
+         int tries = 4 - atoi(row[0]);
          if(tries == 1){
+             
            ss << "User[" << queryStruct.UserIdentifier << "] has " << tries << " try left.";
-           Logger::debug(ss.str());   
+           Logger::debug(ss.str());
+           ss.str("");
+           
          }else if(tries > 1){
+             
            ss << "User[" << queryStruct.UserIdentifier << "] has " << tries << " tries left.";
-           Logger::debug(ss.str()); 
+           Logger::debug(ss.str());
+           ss.str("");
          }              
          return NO_ACCESS; 
       }
@@ -180,8 +189,9 @@ ResponseAnswer DataBaseConnector::mysql_get_permission(){
     }             
   }
   
-  ss << "User[" << queryStruct.UserIdentifier << "] has no acces to room[" << queryStruct.KeyIdentifier << "].";
+  ss << "User[" << queryStruct.UserIdentifier << "] has NO Access to room[" << queryStruct.KeyIdentifier << "].";
   Logger::debug(ss.str());
+  ss.str("");
   
   return NO_ACCESS;              
 }
@@ -209,15 +219,21 @@ bool DataBaseConnector::mysql_get_access_type(){
   
   if(num_result > 0){
     if((strcmp(row[0], cstr) == 0)){
+        
       ss << "User[" << queryStruct.UserIdentifier << "] has Super Access Rights";
-      Logger::debug(ss.str());        
+      Logger::debug(ss.str());   
+      ss.str("");
+      
       return true;   
     } else {
       return false; 
     }
   } else { 
+      
     ss << "User[" << queryStruct.UserIdentifier << "] has NO Super Access Rights";
-    Logger::debug(ss.str());  
+    Logger::debug(ss.str());
+    ss.str("");
+    
     return false;
   }
 }

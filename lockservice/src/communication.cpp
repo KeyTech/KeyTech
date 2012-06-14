@@ -37,11 +37,13 @@ bool Communication::waitForRequest() {
         if (request.isTestFrame()) {             
             ss << "Received Test frame from IP[" << queryStruct.sourceAddress << "], Port[" << queryStruct.sourcePort << "], Key["<< queryStruct.KeyIdentifier << "] ";
             Logger::info(ss.str());
+            ss.str("");
             sendTestResponse();
             return false;
         } else {
             ss << "Received Request frame from IP[" << queryStruct.sourceAddress << "], Port[" << queryStruct.sourcePort << "], Key["<< queryStruct.KeyIdentifier << "] ";
             Logger::info(ss.str());
+            ss.str("");
             return true;
         }
     } catch (HanException& ex) {
@@ -63,6 +65,7 @@ void Communication::sendTestResponse() {
     
     ss << "Sending Test frame to IP[" << queryStruct.sourceAddress << "], Port[" << queryStruct.sourcePort << "], Key["<< queryStruct.KeyIdentifier << "] ";
     Logger::info(ss.str());
+    ss.str("");
     
     client->sendTo(buffer, response.getFrameSize(), queryStruct.sourceAddress, queryStruct.sourcePort);
 }
@@ -81,6 +84,7 @@ void Communication::sendResponse(ResponseAnswer flags) {
 
     ss << "Sending Response frame to IP[" << queryStruct.sourceAddress << "], Port[" << queryStruct.sourcePort << "], Key["<< queryStruct.KeyIdentifier << "], Flag[" << flags << "]";
     Logger::info(ss.str());
+    ss.str("");
     
     client->sendTo(buffer, response.getFrameSize(), queryStruct.sourceAddress, queryStruct.sourcePort);
 }
