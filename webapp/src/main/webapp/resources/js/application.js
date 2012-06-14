@@ -161,6 +161,35 @@ $(document).ready(function () {
 	});
 	
 	$(function() {
+		setInterval(function () {
+			$.ajax("log/userLog", {
+				type: "get",
+				contentType: "application/json", 
+				dataType: "json",
+				success: function (response) {
+					$("#user-log").children('p').remove();
+					for(var index in response) {
+						var log = response[index];
+						var message = 'Gebruiker <strong>' + log.user.firstname + ' ' + 
+							log.user.lastname + ' (' + log.user.userIdentifier + 
+							')</strong> ';
+						if(log.result === 'PERMISSION_GRANTED') {
+							message += 'heeft ruimte <strong>' + log.room.roomName + '</strong> geopend of gesloten.';
+						} else if(log.result == 'INCORRECT_ID') {
+							message += 'heeft een incorrecte pincode ingevoerd bij ruimte <strong>' + log.room.roomName + '</strong>';
+						} else if(log.result == 'NO_ACCESS') {
+							message += 'heeft toegang geprobeerd te verkrijgen tot ruimte <strong>' + log.room.roomName + '</strong>, maar had geen reservering.';
+						} else {
+							message += 'heeft toegang geprobeerd te verkrijgen tot ruimte <strong>' + log.room.roomName + '</strong>, maar is geblokkeerd.';
+						}
+						$("#user-log").append('<p>' + message + '</p>');
+					}
+				}
+			});
+		}, 2000);
+	});
+	
+	$(function() {
 		$(".message-green").click(function() {
 			$(this).hide({
 				duration: 400, 

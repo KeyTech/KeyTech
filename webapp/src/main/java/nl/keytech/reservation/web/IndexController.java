@@ -10,9 +10,4 @@ public class IndexController {
 	public String index() {
 		return "redirect:reservation";
 	}
-	
-	@RequestMapping("log")
-	public String log() {
-		return "log/index";
-	}
 }

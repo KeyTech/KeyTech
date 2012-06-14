@@ -18,7 +18,7 @@
 			<div id="content-table-inner">
 				<div id="user-log">
 					<h2>Gebruikerslog</h2>
-					<p>Gebruiker <strong>Stefan Jansen (466271)</strong> heeft toegang gekregen tot ruimte <strong>C311</strong>.</p>
+					<p>Laden...</p>
 				</div>
 				<div id="lock-log">
 					<h2>Slotenlog</h2>
