@@ -2,6 +2,7 @@ package nl.keytech.reservation.repository;
 
 import java.util.List;
 import nl.keytech.reservation.model.Group;
+import nl.keytech.reservation.model.TestFrameLog;
 import nl.keytech.reservation.model.UserLog;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,6 +14,13 @@ public class LogRepository {
 
 	public LogRepository(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
+	}
+	
+	public List<TestFrameLog> getLastTestFrameLog(int number) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		return (List<TestFrameLog>) session.createQuery("FROM TestFrameLog L ORDER BY L.receivedDate")
+				.setMaxResults(number).list();
 	}
 	
 	public List<UserLog> getLastUserLogs(int number) {

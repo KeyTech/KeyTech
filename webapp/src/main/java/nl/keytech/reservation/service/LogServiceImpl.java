@@ -1,6 +1,7 @@
 package nl.keytech.reservation.service;
 
 import java.util.List;
+import nl.keytech.reservation.model.TestFrameLog;
 import nl.keytech.reservation.model.UserLog;
 import nl.keytech.reservation.repository.LogRepository;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,10 @@ public class LogServiceImpl implements LogService {
 
 	public List<UserLog> getLastUserLogs(int number) {
 		return logRepository.getLastUserLogs(number);
+	}
+	
+	public List<TestFrameLog> getLastTestFrameLog(int number) {
+		return logRepository.getLastTestFrameLog(number);
 	}
 	
 }

@@ -22,7 +22,7 @@
 				</div>
 				<div id="lock-log">
 					<h2>Slotenlog</h2>
-					<p>Slot <strong>123</strong> behorende tot ruimte <strong>C311</strong> heeft zich aangemeld.</p>
+					<p>Laden...</p>
 				</div>
 			</div>
 		</td>

@@ -187,6 +187,21 @@ $(document).ready(function () {
 				}
 			});
 		}, 2000);
+		setInterval(function () {
+			$.ajax("log/testFrameLog", {
+				type: "get",
+				contentType: "application/json", 
+				dataType: "json",
+				success: function (response) {
+					$("#lock-log").children('p').remove();
+					for(var index in response) {
+						var log = response[index];
+						$("#lock-log").append('<p>Netwerkslot <strong>' + log.room.lockIdentifier + '</strong> behorende tot ruimte <strong>' + log.room.roomName + '</strong> heeft zich aangemeld.</p>');
+					}
+				}
+			});
+		}, 2000);
+
 	});
 	
 	$(function() {

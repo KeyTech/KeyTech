@@ -1,6 +1,7 @@
 package nl.keytech.reservation.web;
 
 import java.util.List;
+import nl.keytech.reservation.model.TestFrameLog;
 import nl.keytech.reservation.model.UserLog;
 import nl.keytech.reservation.service.LogService;
 import org.springframework.stereotype.Controller;
@@ -25,5 +26,10 @@ public class LogController {
 	@RequestMapping("userLog")
 	public @ResponseBody List<UserLog> userLogs() {
 		return logService.getLastUserLogs(10);
+	}
+	
+	@RequestMapping("testFrameLog")
+	public @ResponseBody List<TestFrameLog> testFrameLogs() {
+		return logService.getLastTestFrameLog(10);
 	}
 }
