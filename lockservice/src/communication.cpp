@@ -35,12 +35,12 @@ bool Communication::waitForRequest() {
         //queryStruct.Flag = 0;
 
         if (request.isTestFrame()) {             
-            ss << "Test frame ontvangen van IP-nummer[" << queryStruct.sourceAddress << "], Poortnummer[" << queryStruct.sourcePort << "], Slotnummer["<< queryStruct.KeyIdentifier << "] ";
+            ss << "Received Test frame from IP[" << queryStruct.sourceAddress << "], Port[" << queryStruct.sourcePort << "], Key["<< queryStruct.KeyIdentifier << "] ";
             Logger::info(ss.str());
             sendTestResponse();
             return false;
         } else {
-            ss << "Request ontvangen van IP-nummer[" << queryStruct.sourceAddress << "], Poortnummer[" << queryStruct.sourcePort << "], Slotnummer["<< queryStruct.KeyIdentifier << "] ";
+            ss << "Received Request frame from IP[" << queryStruct.sourceAddress << "], Port[" << queryStruct.sourcePort << "], Key["<< queryStruct.KeyIdentifier << "] ";
             Logger::info(ss.str());
             return true;
         }
@@ -61,7 +61,7 @@ void Communication::sendTestResponse() {
 
     buffer = response.getFrame();
     
-    ss << "Test response terug sturen naar IP-nummer[" << queryStruct.sourceAddress << "], Poortnummer[" << queryStruct.sourcePort << "], Slotnummer["<< queryStruct.KeyIdentifier << "] ";
+    ss << "Sending Test frame to IP[" << queryStruct.sourceAddress << "], Port[" << queryStruct.sourcePort << "], Key["<< queryStruct.KeyIdentifier << "] ";
     Logger::info(ss.str());
     
     client->sendTo(buffer, response.getFrameSize(), queryStruct.sourceAddress, queryStruct.sourcePort);
@@ -79,7 +79,7 @@ void Communication::sendResponse(ResponseAnswer flags) {
 
     buffer = response.getFrame();
 
-    ss << "Response terug sturen naar IP-nummer[" << queryStruct.sourceAddress << "], Poortnummer[" << queryStruct.sourcePort << "], Slotnummer["<< queryStruct.KeyIdentifier << "], Flag[" << flags << "]";
+    ss << "Sending Response frame to IP[" << queryStruct.sourceAddress << "], Port[" << queryStruct.sourcePort << "], Key["<< queryStruct.KeyIdentifier << "], Flag[" << flags << "]";
     Logger::info(ss.str());
     
     client->sendTo(buffer, response.getFrameSize(), queryStruct.sourceAddress, queryStruct.sourcePort);

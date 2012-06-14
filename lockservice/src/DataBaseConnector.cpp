@@ -111,6 +111,9 @@ void DataBaseConnector::mysql_set_query_user_permission() {
   delete[] cstr;
 }  
 
+/**
+ *  Look what kind of persmission the user has
+ */
 ResponseAnswer DataBaseConnector::mysql_get_permission(){
   int num_result = 0;
   string strResult;
@@ -131,37 +134,61 @@ ResponseAnswer DataBaseConnector::mysql_get_permission(){
   
   if(num_result > 0){      
     if((strcmp(row[3], "0") == 0) && (strcmp(row[2], cstr) == 0)){
-      printf("User found ! \n");
+     
+      ss << "User[" << queryStruct.UserIdentifier << "] has Permission for key[" << queryStruct.KeyIdentifier << "].";
+      Logger::debug(ss.str());   
+      
       userLogging(PERMISSION_GRANTED);
       return PERMISSION_GRANTED;
     } else if((strcmp(row[3], "1") == 0) && ((strcmp(row[2], cstr) == 0) || (strcmp(row[2], cstr) != 0))) {
-      printf("User is blocked and has no ACCESS ! \n");
+      
+      ss << "User[" << queryStruct.UserIdentifier << "] is blocked.";
+      Logger::debug(ss.str()); 
+      
       userLogging(USER_BLOCKED);
       return USER_BLOCKED;
     } else if((strcmp(row[3], "0") == 0) && (strcmp(row[2], cstr) != 0))  {
       
       countLogTries(queryStruct.UserIdentifier);
       row = mysql_fetch_row(res);
+
+      ss << "User[" << queryStruct.UserIdentifier << "] used a wrong pincode for room[" << queryStruct.KeyIdentifier << "].";
+      Logger::debug(ss.str()); 
       
-      printf("Wrong Pincode ! \n");
-      
-      if(atoi(row[0]) >= 3){
+      if(atoi(row[0]) >= 5){
          userLogging(USER_BLOCKED); 
          updateUserStatus(); 
-         printf("User is now blocked \n");  
+         
+         ss << "User[" << queryStruct.UserIdentifier << "] is now blocked.";
+         Logger::debug(ss.str());
+         
          return USER_BLOCKED; 
       } else {
          userLogging(NO_ACCESS); 
-         printf("User has %u tries left \n", (3 - atoi(row[0])));  
+         //printf("User has %u tries left \n", (5 - atoi(row[0])));
+         int tries = 5 - atoi(row[0]);
+         if(tries == 1){
+           ss << "User[" << queryStruct.UserIdentifier << "] has " << tries << " try left.";
+           Logger::debug(ss.str());   
+         }else if(tries > 1){
+           ss << "User[" << queryStruct.UserIdentifier << "] has " << tries << " tries left.";
+           Logger::debug(ss.str()); 
+         }              
          return NO_ACCESS; 
       }
       mysql_free_result(res); 
     }             
-  }   
-  printf("User not found ! \n");
+  }
+  
+  ss << "User[" << queryStruct.UserIdentifier << "] has no acces to room[" << queryStruct.KeyIdentifier << "].";
+  Logger::debug(ss.str());
+  
   return NO_ACCESS;              
 }
 
+/**
+ *  Get Access Type (Look if user is a super user)
+ */
 bool DataBaseConnector::mysql_get_access_type(){
   int num_result = 0;
   string strResult;
@@ -182,14 +209,15 @@ bool DataBaseConnector::mysql_get_access_type(){
   
   if(num_result > 0){
     if((strcmp(row[0], cstr) == 0)){
-      printf("User has super acces rights \n");
+      ss << "User[" << queryStruct.UserIdentifier << "] has Super Access Rights";
+      Logger::debug(ss.str());        
       return true;   
     } else {
-      printf("Wrong pincode \n");
       return false; 
     }
   } else { 
-    printf("User has no super acces rights  \n");
+    ss << "User[" << queryStruct.UserIdentifier << "] has NO Super Access Rights";
+    Logger::debug(ss.str());  
     return false;
   }
 }

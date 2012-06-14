@@ -16,6 +16,7 @@
 #include <iostream>
 #include <sstream>
 #include "Defines.h"
+#include "Logger.h"
 
 using namespace std;
 
@@ -48,7 +49,9 @@ public:
   
   void updateUserStatus();
    
-private:
+private:  
+  stringstream ss; 
+  
   struct qrStruct {       
         uint16_t KeyIdentifier;
         uint32_t UserIdentifier;
