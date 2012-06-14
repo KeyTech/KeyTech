@@ -19,11 +19,9 @@ ResponseAnswer Authenticator::authenticate(uint16_t KeyIdentifier, uint32_t User
   dbconnector->mysql_set_query_information(KeyIdentifier, UserIdentifier, Pincode);
      
   if(dbconnector->mysql_get_access_type()){
-       
     return PERMISSION_GRANTED;  
-      
-  } else {
-          
+    
+  } else {   
     return dbconnector->mysql_get_permission();     
   }    
 }

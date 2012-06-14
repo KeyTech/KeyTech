@@ -12,7 +12,7 @@ void Logger::debug(string message) {
 }
 
 void Logger::info(string message) {
-	Logger::log("INFO", message);
+	Logger::log("INFO ", message);
 }
 
 void Logger::warning(string message) {

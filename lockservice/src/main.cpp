@@ -20,8 +20,6 @@ int main(int argc, char** argv) {
         return EXIT_FAILURE;
     }
     
-    cout << "\nBooting the lock service. \n" << endl;
-    
     lockservice = new LockService(argc, argv);
 
     return 0;
