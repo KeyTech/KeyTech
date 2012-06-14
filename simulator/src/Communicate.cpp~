@@ -42,7 +42,7 @@ bool Communicate::sendTestRequest() {
     HanResponse response;
 
     request.setTestFrame(true);
-    request.setKeyIdentifier(lockIdentifier);
+    request.setLockIdentifier(lockIdentifier);
 
     try {
     	sendAndReceiveData(&request, &response);
